@@ -1,0 +1,8 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/DinosaurusPark/.vs
+/DinosaurusPark/obj
+/DinosaurusPark/bin
+/DinosaurusPark/DinosaurusPark.csproj.user
