@@ -3,6 +3,8 @@
 ################################################################################
 
 /.vs
+/bin
+/obj
 /src/DinosaurusPark/.vs
 /src/DinosaurusPark/obj
 /src/DinosaurusPark/bin

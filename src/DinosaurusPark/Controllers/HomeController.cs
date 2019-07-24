@@ -1,6 +1,6 @@
-﻿using System.Diagnostics;
+﻿using DinosaurusPark.Models;
 using Microsoft.AspNetCore.Mvc;
-using DinosaurusPark.Models;
+using System.Diagnostics;
 
 namespace DinosaurusPark.Controllers
 {
