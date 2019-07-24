@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DinosaurusPark", "src\DinosaurusPark\DinosaurusPark.csproj", "{38BA8F78-998E-485D-95FE-476DC8406A7F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DinosaurusPark", "src\DinosaurusPark\DinosaurusPark.csproj", "{38BA8F78-998E-485D-95FE-476DC8406A7F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C7AB1025-BCE4-4805-A1A6-B578CFD4BB02}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DinosaurusPark.IntegrationTests", "tests\DinosaurusPark.IntegrationTests\DinosaurusPark.IntegrationTests.csproj", "{6E171579-EF6E-45E2-B47A-DACB42FB243B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DinosaurusPark.IntegrationTests", "tests\DinosaurusPark.IntegrationTests\DinosaurusPark.IntegrationTests.csproj", "{6E171579-EF6E-45E2-B47A-DACB42FB243B}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{48B68EA8-B74B-414E-926B-AB14EDFF35FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +25,10 @@ Global
 		{6E171579-EF6E-45E2-B47A-DACB42FB243B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E171579-EF6E-45E2-B47A-DACB42FB243B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E171579-EF6E-45E2-B47A-DACB42FB243B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48B68EA8-B74B-414E-926B-AB14EDFF35FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48B68EA8-B74B-414E-926B-AB14EDFF35FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48B68EA8-B74B-414E-926B-AB14EDFF35FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48B68EA8-B74B-414E-926B-AB14EDFF35FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

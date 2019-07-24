@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  dinosauruspark:
+    image: dinosauruspark
+    build:
+      context: .
+      dockerfile: src/dinosauruspark/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development      
+    depends_on:
+      - pg
+    ports:
+      - "80:80"
+
+  pg:
+    image: postgres:9.6
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./10-init-pg.sql:/docker-entrypoint-initdb.d/10-init-pg.sql
