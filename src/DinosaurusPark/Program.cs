@@ -1,13 +1,22 @@
-﻿using Microsoft.AspNetCore;
+﻿using System.Threading.Tasks;
+using FluentMigrator.Runner;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DinosaurusPark
 {
-    public class Program
+    public static class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            var host = CreateWebHostBuilder(args).Build();
+
+            host.Services
+                .GetRequiredService<IMigrationRunner>()
+                .MigrateUp();
+
+            await host.RunAsync();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
