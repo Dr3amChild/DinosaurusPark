@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DinosaurusPark.IntegrationT
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{48B68EA8-B74B-414E-926B-AB14EDFF35FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DinosaurusPark.Contracts", "src\DinosaurusPark.Contracts\DinosaurusPark.Contracts.csproj", "{96B718BF-7A64-4A2E-A024-739339CDB24F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DinosaurusPark.Contracts", "src\DinosaurusPark.Contracts\DinosaurusPark.Contracts.csproj", "{96B718BF-7A64-4A2E-A024-739339CDB24F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DinosaurusPark.DataAccess", "src\DinosaurusPark.DataAccess\DinosaurusPark.DataAccess.csproj", "{0F6CBE2E-FE3F-41C4-BD45-9A36883EAA7F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{96B718BF-7A64-4A2E-A024-739339CDB24F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96B718BF-7A64-4A2E-A024-739339CDB24F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96B718BF-7A64-4A2E-A024-739339CDB24F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F6CBE2E-FE3F-41C4-BD45-9A36883EAA7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F6CBE2E-FE3F-41C4-BD45-9A36883EAA7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F6CBE2E-FE3F-41C4-BD45-9A36883EAA7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F6CBE2E-FE3F-41C4-BD45-9A36883EAA7F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

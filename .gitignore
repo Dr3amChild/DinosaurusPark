@@ -13,3 +13,5 @@
 /tests/DinosaurusPark.IntegrationTests/obj
 /src/DinosaurusPark.Contracts/bin
 /src/DinosaurusPark.Contracts/obj
+/src/DinosaurusPark.DataAccess/bin
+/src/DinosaurusPark.DataAccess/obj
