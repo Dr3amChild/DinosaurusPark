@@ -11,3 +11,5 @@
 /src/DinosaurusPark/DinosaurusPark.csproj.user
 /tests/DinosaurusPark.IntegrationTests/bin
 /tests/DinosaurusPark.IntegrationTests/obj
+/src/DinosaurusPark.Contracts/bin
+/src/DinosaurusPark.Contracts/obj
