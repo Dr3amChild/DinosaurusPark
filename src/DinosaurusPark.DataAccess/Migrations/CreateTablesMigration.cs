@@ -18,7 +18,7 @@ namespace DinosaurusPark.DataAccess.Migrations
                 .WithColumn("FoodType").AsInt32().NotNullable();
 
             Create.Table("Dinosaurs")
-                .WithColumn(idColumn).AsInt32().PrimaryKey("PK_Species").NotNullable()
+                .WithColumn(idColumn).AsInt32().PrimaryKey("PK_Dinosaurs").NotNullable()
                 .WithColumn("SpeciesId").AsInt32().ForeignKey("FK_SpeciesId", speciesTable, idColumn).NotNullable()
                 .WithColumn("Name").AsString().NotNullable();
         }
