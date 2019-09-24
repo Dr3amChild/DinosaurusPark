@@ -1,12 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
-using DinosaurusPark.Exceptions;
+﻿using DinosaurusPark.Exceptions;
 using DinosaurusPark.Settings;
 using FluentMigrator.Runner;
-using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Threading.Tasks;
 
 namespace DinosaurusPark
 {
@@ -19,7 +18,7 @@ namespace DinosaurusPark
             var settings = new AppSettings();
             config.Bind(settings);
 
-            var host = WebHost.CreateDefaultBuilder(args)
+            var host = new WebHostBuilder()
                 .UseStartup<Startup>()
                 .UseConfiguration(config)
                 .ConfigureServices(s =>

@@ -1,4 +1,5 @@
-﻿using DinosaurusPark.Settings;
+﻿using DinosaurusPark.DataAccess.Migrations;
+using DinosaurusPark.Settings;
 using FluentMigrator.Runner;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -27,11 +28,13 @@ namespace DinosaurusPark
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddFluentMigratorCore()
+            services
+                .AddFluentMigratorCore()
                 .ConfigureRunner(builder => builder
                     .AddPostgres()
                     .WithGlobalConnectionString(_settings.Db.ConnectionString)
-                    .ScanIn(typeof(object).Assembly).For.Migrations());
+                    .ScanIn(typeof(CreateTablesMigration).Assembly)
+                    .For.Migrations());
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
