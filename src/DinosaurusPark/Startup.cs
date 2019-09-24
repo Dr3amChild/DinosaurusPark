@@ -1,22 +1,23 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using DinosaurusPark.Settings;
+using FluentMigrator.Runner;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace DinosaurusPark
 {
-    public class Startup
+    internal class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly AppSettings _settings;
+
+        public Startup(AppSettings settings)
         {
-            Configuration = configuration;
+            _settings = settings ?? throw new ArgumentNullException(nameof(settings));
         }
 
-        public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<CookiePolicyOptions>(options =>
@@ -26,10 +27,15 @@ namespace DinosaurusPark
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddFluentMigratorCore()
+                .ConfigureRunner(builder => builder
+                    .AddPostgres()
+                    .WithGlobalConnectionString(_settings.Db.ConnectionString)
+                    .ScanIn(typeof(object).Assembly).For.Migrations());
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -46,9 +52,7 @@ namespace DinosaurusPark
 
             app.UseMvc(routes =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
