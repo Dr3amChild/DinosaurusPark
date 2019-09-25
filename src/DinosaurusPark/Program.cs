@@ -19,6 +19,7 @@ namespace DinosaurusPark
             config.Bind(settings);
 
             var host = new WebHostBuilder()
+                .UseKestrel()
                 .UseStartup<Startup>()
                 .UseConfiguration(config)
                 .ConfigureServices(s =>

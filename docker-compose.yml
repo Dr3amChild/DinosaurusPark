@@ -8,7 +8,7 @@ services:
       dockerfile: src/DinosaurusPark/Dockerfile
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      DINOPARK_DB__CONNECTIONSTRING: Host=pg;Port=5432;Database=DinosaurusPark;Username=postgres;
+      DINOPARK_DB__CONNECTIONSTRING: Host=pg;Port=5432;Database=dinosaurus_park;Username=postgres;
     depends_on:
       - pg
     ports:

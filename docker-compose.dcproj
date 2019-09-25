@@ -7,8 +7,8 @@
   </PropertyGroup>
   <PropertyGroup>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
-    <DockerServiceName>lecta.contentmanagement.host_1</DockerServiceName>
-    <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/content/swagger</DockerServiceUrl>
+    <DockerServiceName>dinosaurus_park_1</DockerServiceName>
+    <DockerServiceUrl>{Scheme}://localhost:{ServicePort}</DockerServiceUrl>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.yml" />
