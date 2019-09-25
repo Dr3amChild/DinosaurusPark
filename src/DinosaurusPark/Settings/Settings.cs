@@ -1,4 +1,6 @@
-﻿namespace DinosaurusPark.Settings
+﻿using DinosaurusPark.DataAccess;
+
+namespace DinosaurusPark.Settings
 {
     public class AppSettings
     {

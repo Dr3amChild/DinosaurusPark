@@ -1,5 +1,5 @@
-﻿using System;
-using FluentMigrator;
+﻿using FluentMigrator;
+using Microsoft.EntityFrameworkCore;
 
 namespace DinosaurusPark.DataAccess.Migrations
 {
