@@ -32,6 +32,7 @@ namespace DinosaurusPark.Generation
                         Id = id,
                         FoodType = f.Random.Enum(Enum.GetValues(typeof(FoodType)).OfType<FoodType>().ToArray()),
                         Name = f.Random.Word(),
+                        Description = f.Lorem.Paragraph(),
                     });
         }
 
