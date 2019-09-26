@@ -15,3 +15,5 @@
 /src/DinosaurusPark.Contracts/obj
 /src/DinosaurusPark.DataAccess/bin
 /src/DinosaurusPark.DataAccess/obj
+/src/DinosaurusPark.Generation/bin
+/src/DinosaurusPark.Generation/obj
