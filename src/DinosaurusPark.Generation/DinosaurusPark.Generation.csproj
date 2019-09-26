@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\DinosaurusPark.Contracts\DinosaurusPark.Contracts.csproj" />
+    <ProjectReference Include="..\DinosaurusPark.Contracts\DinosaurusPark.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

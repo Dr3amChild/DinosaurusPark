@@ -5,10 +5,10 @@
 /.vs
 /bin
 /obj
-/src/DinosaurusPark/.vs
-/src/DinosaurusPark/obj
-/src/DinosaurusPark/bin
-/src/DinosaurusPark/DinosaurusPark.csproj.user
+/src/DinosaurusPark.WebApplication/.vs
+/src/DinosaurusPark.WebApplication/obj
+/src/DinosaurusPark.WebApplication/bin
+/src/DinosaurusPark.WebApplication/DinosaurusPark.WebApplication.csproj.user
 /tests/DinosaurusPark.IntegrationTests/bin
 /tests/DinosaurusPark.IntegrationTests/obj
 /src/DinosaurusPark.Contracts/bin

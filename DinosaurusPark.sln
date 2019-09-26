@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DinosaurusPark", "src\DinosaurusPark\DinosaurusPark.csproj", "{38BA8F78-998E-485D-95FE-476DC8406A7F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DinosaurusPark.WebApplication", "src\DinosaurusPark.WebApplication\DinosaurusPark.WebApplication.csproj", "{38BA8F78-998E-485D-95FE-476DC8406A7F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C7AB1025-BCE4-4805-A1A6-B578CFD4BB02}"
 EndProject
@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DinosaurusPark.Contracts", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DinosaurusPark.DataAccess", "src\DinosaurusPark.DataAccess\DinosaurusPark.DataAccess.csproj", "{0F6CBE2E-FE3F-41C4-BD45-9A36883EAA7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DinosaurusPark.Generation", "src\DinosaurusPark.Generation\DinosaurusPark.Generation.csproj", "{BFA27D6F-B623-4DC1-88A8-46262DCF4D8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DinosaurusPark.Generation", "src\DinosaurusPark.Generation\DinosaurusPark.Generation.csproj", "{BFA27D6F-B623-4DC1-88A8-46262DCF4D8B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
