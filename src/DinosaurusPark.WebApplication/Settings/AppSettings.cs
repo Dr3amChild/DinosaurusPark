@@ -1,6 +1,6 @@
 ﻿using DinosaurusPark.DataAccess;
 
-namespace DinosaurusPark.Settings
+namespace DinosaurusPark.WebApplication.Settings
 {
     public class AppSettings
     {

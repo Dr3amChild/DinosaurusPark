@@ -1,8 +1,8 @@
-﻿using DinosaurusPark.Models;
+﻿using System.Diagnostics;
+using DinosaurusPark.WebApplication.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
-namespace DinosaurusPark.Controllers
+namespace DinosaurusPark.WebApplication.Controllers
 {
     public class HomeController : Controller
     {

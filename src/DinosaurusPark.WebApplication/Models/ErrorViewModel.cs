@@ -1,4 +1,4 @@
-namespace DinosaurusPark.Models
+namespace DinosaurusPark.WebApplication.Models
 {
     public class ErrorViewModel
     {

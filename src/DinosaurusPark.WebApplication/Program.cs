@@ -1,5 +1,5 @@
-﻿using DinosaurusPark.Exceptions;
-using DinosaurusPark.Settings;
+﻿using DinosaurusPark.WebApplication.Exceptions;
+using DinosaurusPark.WebApplication.Settings;
 using FluentMigrator.Runner;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Threading.Tasks;
 
-namespace DinosaurusPark
+namespace DinosaurusPark.WebApplication
 {
     public static class Program
     {

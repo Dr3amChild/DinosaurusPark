@@ -14,14 +14,14 @@ namespace DinosaurusPark.DataAccess
             Database.EnsureCreated();
         }
 
+        public DbSet<Dinosaur> Dinosaurs { get; set; }
+
+        public DbSet<Species> Species { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
             optionsBuilder.UseNpgsql(_settings.ConnectionString);
         }
-
-        public DbSet<Dinosaur> Dinosaurs { get; set; }
-
-        public DbSet<Species> Species { get; set; }
     }
 }

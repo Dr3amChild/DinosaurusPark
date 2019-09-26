@@ -1,5 +1,5 @@
 ﻿using DinosaurusPark.DataAccess.Migrations;
-using DinosaurusPark.Settings;
+using DinosaurusPark.WebApplication.Settings;
 using FluentMigrator.Runner;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace DinosaurusPark
+namespace DinosaurusPark.WebApplication
 {
     internal class Startup
     {

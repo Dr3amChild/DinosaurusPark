@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace DinosaurusPark.Exceptions
+namespace DinosaurusPark.WebApplication.Exceptions
 {
     [Serializable]
     public class ApplicationStartupException : Exception
