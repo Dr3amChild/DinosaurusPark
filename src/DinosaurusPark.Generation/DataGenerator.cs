@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DinosaurusPark.Generation.Exceptions;
 
 namespace DinosaurusPark.Generation
 {
@@ -14,11 +15,17 @@ namespace DinosaurusPark.Generation
 
         private readonly Faker<Dinosaur> _dinoFaker = new Faker<Dinosaur>();
 
-        public async Task Generate(int speciesCount, int disnosaursCount)
+        public async Task Generate(int speciesCount, int dinosaursCount)
         {
+            if (speciesCount < 0)
+                throw new GenerationException($"{nameof(speciesCount)} must be grater than 0");
+
+            if (dinosaursCount < 0)
+                throw new GenerationException($"{nameof(dinosaursCount)} must be grater than 0");
+
             var species = Enumerable.Range(1, speciesCount).Select(GenerateSpecies).ToArray();
             var rnd = new Random();
-            var dinosaurs = Enumerable.Range(1, disnosaursCount).Select(id => GenerateDinosaur(id, species[rnd.Next(0, speciesCount)])).ToArray();
+            var dinosaurs = Enumerable.Range(1, dinosaursCount).Select(id => GenerateDinosaur(id, species[rnd.Next(0, speciesCount)])).ToArray();
 
             await Save(species, dinosaurs);
         }
