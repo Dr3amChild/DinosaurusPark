@@ -4,11 +4,10 @@
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
     <ProjectGuid>48b68ea8-b74b-414e-926b-ab14edff35fb</ProjectGuid>
-  </PropertyGroup>
-  <PropertyGroup>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceName>dinosaurus_park_1</DockerServiceName>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}</DockerServiceUrl>
+    <DockerServiceName>dinosauruspark.webapplication</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.yml" />

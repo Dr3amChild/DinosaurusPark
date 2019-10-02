@@ -7,6 +7,6 @@ namespace DinosaurusPark.Contracts
     /// </summary>
     public interface IDataGenerator
     {
-        Task Generate(int speciesCount, int disnosaursCount);
+        Task Generate(int speciesCount, int dinosaursCount);
     }
 }

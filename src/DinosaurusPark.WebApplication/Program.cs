@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace DinosaurusPark.WebApplication
@@ -18,21 +19,27 @@ namespace DinosaurusPark.WebApplication
             var settings = new AppSettings();
             config.Bind(settings);
 
-            var host = new WebHostBuilder()
-                .UseKestrel()
-                .UseStartup<Startup>()
-                .UseConfiguration(config)
-                .ConfigureServices(s =>
-                {
-                    s.AddSingleton(settings);
-                })
-                .Build();
+            var host = BuildWebHost(config, settings);
 
             host.Services
                 .GetRequiredService<IMigrationRunner>()
                 .MigrateUp();
 
             await host.RunAsync();
+        }
+
+        private static IWebHost BuildWebHost(IConfigurationRoot config, AppSettings settings)
+        {
+            return new WebHostBuilder()
+                .UseKestrel()
+                .UseStartup<Startup>()
+                .UseConfiguration(config)
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .ConfigureServices(s =>
+                {
+                    s.AddSingleton(settings);
+                })
+                .Build();
         }
 
         private static string GetEnvironment()
