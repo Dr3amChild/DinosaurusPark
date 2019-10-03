@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using Serilog;
 
 namespace DinosaurusPark.WebApplication
 {
@@ -19,8 +20,8 @@ namespace DinosaurusPark.WebApplication
             var settings = new AppSettings();
             config.Bind(settings);
 
+            InitializeLogger(settings);
             var host = BuildWebHost(config, settings);
-
             host.Services
                 .GetRequiredService<IMigrationRunner>()
                 .MigrateUp();
@@ -34,6 +35,7 @@ namespace DinosaurusPark.WebApplication
                 .UseKestrel()
                 .UseStartup<Startup>()
                 .UseConfiguration(config)
+                .UseSerilog()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .ConfigureServices(s =>
                 {
@@ -58,6 +60,17 @@ namespace DinosaurusPark.WebApplication
                 .AddJsonFile($"appsettings.{env}.json", optional: false)
                 .AddEnvironmentVariables("DINOPARK_")
                 .Build();
+        }
+
+        private static void InitializeLogger(AppSettings settings)
+        {
+            Log.Logger = new LoggerConfiguration()
+                .Enrich.FromLogContext()
+                .MinimumLevel.Debug()
+                .WriteTo.Console(
+                    settings.Serilog.Level,
+                    "{NewLine}{Timestamp:HH:mm:ss} [{Level}] ({CorrelationToken}) {Message}{NewLine}{Exception}")
+                .CreateLogger();
         }
     }
 }

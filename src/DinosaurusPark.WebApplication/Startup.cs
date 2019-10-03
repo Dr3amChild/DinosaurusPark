@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using Serilog;
 
 namespace DinosaurusPark.WebApplication
 {
@@ -50,13 +51,18 @@ namespace DinosaurusPark.WebApplication
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            app.UseStaticFiles();
-            app.UseCookiePolicy();
+            app
+                .UseStaticFiles()
+                .UseCookiePolicy()
+                .UseMvc(routes =>
+                    {
+                        routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
+                    });
 
-            app.UseMvc(routes =>
+            if (_settings.Serilog.UseRequestLogging)
             {
-                routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
-            });
+                app.UseSerilogRequestLogging();
+            }
         }
     }
 }
