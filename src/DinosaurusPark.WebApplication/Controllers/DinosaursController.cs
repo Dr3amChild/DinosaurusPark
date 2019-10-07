@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DinosaurusPark.WebApplication.Controllers
 {
-    public class HomeController : Controller
+    public class DinosaursController : Controller
     {
         public IActionResult Index()
         {

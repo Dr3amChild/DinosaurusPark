@@ -48,7 +48,7 @@ namespace DinosaurusPark.WebApplication
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Dinosaurs/Error");
             }
 
             app
@@ -56,7 +56,7 @@ namespace DinosaurusPark.WebApplication
                 .UseCookiePolicy()
                 .UseMvc(routes =>
                     {
-                        routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
+                        routes.MapRoute(name: "default", template: "{controller=Dinisaurs}/{action=Index}/{id?}");
                     });
 
             if (_settings.Serilog.UseRequestLogging)
