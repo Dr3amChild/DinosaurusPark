@@ -34,5 +34,25 @@ namespace DinosaurusPark.DataAccess.Repositories
                 return await ctx.Dinosaurs.Skip(offset).Take(count).ToArrayAsync();
             }
         }
+
+        public async Task Save(params Dinosaur[] dinosaurs)
+        {
+            try
+            {
+                using (var ctx = new DinosaurusContext(_settings))
+                {
+                    foreach (var dino in dinosaurs)
+                    {
+                        await ctx.Dinosaurs.AddAsync(dino);
+                    }
+
+                    await ctx.SaveChangesAsync();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

@@ -1,19 +1,26 @@
 ﻿using Bogus;
 using DinosaurusPark.Contracts;
 using DinosaurusPark.Contracts.Models;
+using DinosaurusPark.Contracts.Repositories;
+using DinosaurusPark.Generation.Exceptions;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DinosaurusPark.Generation.Exceptions;
 
 namespace DinosaurusPark.Generation
 {
     public class DataGenerator : IDataGenerator
     {
+        private readonly ISpeciesRepository _speciesRepository;
+        private readonly IDinoRepository _dinoRepository;
         private readonly Faker<Species> _speciesFaker = new Faker<Species>();
-
         private readonly Faker<Dinosaur> _dinoFaker = new Faker<Dinosaur>();
+
+        public DataGenerator(ISpeciesRepository speciesRepository, IDinoRepository dinoRepository)
+        {
+            _speciesRepository = speciesRepository ?? throw new ArgumentNullException(nameof(speciesRepository));
+            _dinoRepository = dinoRepository ?? throw new ArgumentNullException(nameof(dinoRepository));
+        }
 
         public async Task Generate(int speciesCount, int dinosaursCount)
         {
@@ -37,7 +44,7 @@ namespace DinosaurusPark.Generation
                     new Species
                     {
                         Id = id,
-                        FoodType = f.Random.Enum(Enum.GetValues(typeof(FoodType)).OfType<FoodType>().ToArray()),
+                        FoodType = f.Random.Enum<FoodType>(),
                         Name = f.Random.Word(),
                         Description = f.Lorem.Paragraph(),
                     });
@@ -50,15 +57,15 @@ namespace DinosaurusPark.Generation
                     new Dinosaur
                     {
                         Id = id,
-                        Species = species,
+                        SpeciesId = species.Id,
                         Name = f.Random.Word(),
                     });
         }
 
-        private async Task Save(IEnumerable<Species> species, IEnumerable<Dinosaur> dinos)
+        private async Task Save(Species[] species, Dinosaur[] dinos)
         {
-            // todo replace with await _repository.Save()
-            await Task.CompletedTask;
+            await _speciesRepository.Save(species);
+            await _dinoRepository.Save(dinos);
         }
     }
 }

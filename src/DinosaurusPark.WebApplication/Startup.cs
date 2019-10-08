@@ -1,4 +1,8 @@
-﻿using DinosaurusPark.DataAccess.Migrations;
+﻿using DinosaurusPark.Contracts;
+using DinosaurusPark.Contracts.Repositories;
+using DinosaurusPark.DataAccess.Migrations;
+using DinosaurusPark.DataAccess.Repositories;
+using DinosaurusPark.Generation;
 using DinosaurusPark.WebApplication.Settings;
 using FluentMigrator.Runner;
 using Microsoft.AspNetCore.Builder;
@@ -6,8 +10,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 using Serilog;
+using System;
 
 namespace DinosaurusPark.WebApplication
 {
@@ -35,9 +39,14 @@ namespace DinosaurusPark.WebApplication
                     .AddPostgres()
                     .WithGlobalConnectionString(_settings.Db.ConnectionString)
                     .ScanIn(typeof(CreateTablesMigration).Assembly)
-                    .For.Migrations());
-
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+                    .For.Migrations())
+                .AddSingleton(_settings)
+                .AddSingleton(_settings.Db)
+                .AddSingleton<ISpeciesRepository, SpeciesRepository>()
+                .AddSingleton<IDinoRepository, DinoRepository>()
+                .AddSingleton<IDataGenerator, DataGenerator>()
+                .AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
