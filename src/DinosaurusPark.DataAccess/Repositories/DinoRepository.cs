@@ -37,21 +37,10 @@ namespace DinosaurusPark.DataAccess.Repositories
 
         public async Task Save(params Dinosaur[] dinosaurs)
         {
-            try
+            using (var ctx = new DinosaurusContext(_settings))
             {
-                using (var ctx = new DinosaurusContext(_settings))
-                {
-                    foreach (var dino in dinosaurs)
-                    {
-                        await ctx.Dinosaurs.AddAsync(dino);
-                    }
-
-                    await ctx.SaveChangesAsync();
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
+                await ctx.Dinosaurs.AddRangeAsync(dinosaurs);
+                await ctx.SaveChangesAsync();
             }
         }
     }
