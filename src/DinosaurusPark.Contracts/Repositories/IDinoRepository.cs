@@ -8,6 +8,8 @@ namespace DinosaurusPark.Contracts.Repositories
     {
         Task<Dinosaur> GetById(int id);
         Task<IReadOnlyCollection<Dinosaur>> GetAll(int count, int offset);
-        Task Save(params Dinosaur[] dinosaurs);
+        Task AddSpecies(params Species[] species);
+        Task AddDinosaurs(params Dinosaur[] dinosaurs);
+        Task Commit();
     }
 }

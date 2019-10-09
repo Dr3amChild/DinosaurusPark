@@ -1,5 +1,6 @@
 ﻿using DinosaurusPark.Contracts;
 using DinosaurusPark.Contracts.Repositories;
+using DinosaurusPark.DataAccess;
 using DinosaurusPark.DataAccess.Migrations;
 using DinosaurusPark.DataAccess.Repositories;
 using DinosaurusPark.Generation;
@@ -42,9 +43,9 @@ namespace DinosaurusPark.WebApplication
                     .For.Migrations())
                 .AddSingleton(_settings)
                 .AddSingleton(_settings.Db)
-                .AddSingleton<ISpeciesRepository, SpeciesRepository>()
-                .AddSingleton<IDinoRepository, DinoRepository>()
-                .AddSingleton<IDataGenerator, DataGenerator>()
+                .AddScoped<DinosaurusContext>()
+                .AddScoped<IDinoRepository, DinoRepository>()
+                .AddScoped<IDataGenerator, DataGenerator>()
                 .AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

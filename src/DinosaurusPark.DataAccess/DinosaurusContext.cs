@@ -23,5 +23,20 @@ namespace DinosaurusPark.DataAccess
             base.OnConfiguring(optionsBuilder);
             optionsBuilder.UseNpgsql(_settings.ConnectionString);
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Species>(b =>
+            {
+                b.HasKey(e => e.Id);
+                b.Property(e => e.Id).ValueGeneratedOnAdd();
+            });
+
+            modelBuilder.Entity<Dinosaur>(b =>
+            {
+                b.HasKey(e => e.Id);
+                b.Property(e => e.Id).ValueGeneratedOnAdd();
+            });
+        }
     }
 }

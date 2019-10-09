@@ -12,13 +12,13 @@ namespace DinosaurusPark.DataAccess.Migrations
         {
             const string idColumn = "Id";
             Create.Table(SpeciesTable)
-                .WithColumn(idColumn).AsInt32().PrimaryKey("PK_Species").NotNullable()
+                .WithColumn(idColumn).AsInt32().PrimaryKey("PK_Species").Identity().NotNullable()
                 .WithColumn("Name").AsString().NotNullable()
                 .WithColumn("Description").AsString().NotNullable()
                 .WithColumn("FoodType").AsInt32().NotNullable();
 
             Create.Table(DinosaurusTable)
-                .WithColumn(idColumn).AsInt32().PrimaryKey("PK_Dinosaurs").NotNullable()
+                .WithColumn(idColumn).AsInt32().PrimaryKey("PK_Dinosaurs").Identity().NotNullable()
                 .WithColumn("SpeciesId").AsInt32().ForeignKey("FK_SpeciesId", SpeciesTable, idColumn).NotNullable()
                 .WithColumn("Name").AsString().NotNullable();
         }

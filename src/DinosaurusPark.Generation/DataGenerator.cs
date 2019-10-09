@@ -11,14 +11,12 @@ namespace DinosaurusPark.Generation
 {
     public class DataGenerator : IDataGenerator
     {
-        private readonly ISpeciesRepository _speciesRepository;
         private readonly IDinoRepository _dinoRepository;
         private readonly Faker<Species> _speciesFaker = new Faker<Species>();
         private readonly Faker<Dinosaur> _dinoFaker = new Faker<Dinosaur>();
 
-        public DataGenerator(ISpeciesRepository speciesRepository, IDinoRepository dinoRepository)
+        public DataGenerator(IDinoRepository dinoRepository)
         {
-            _speciesRepository = speciesRepository ?? throw new ArgumentNullException(nameof(speciesRepository));
             _dinoRepository = dinoRepository ?? throw new ArgumentNullException(nameof(dinoRepository));
         }
 
@@ -30,42 +28,41 @@ namespace DinosaurusPark.Generation
             if (dinosaursCount < 0)
                 throw new GenerationException($"{nameof(dinosaursCount)} must be grater than 0");
 
-            var species = Enumerable.Range(1, speciesCount).Select(GenerateSpecies).ToArray();
+            var species = Enumerable.Range(1, speciesCount).Select(i => GenerateSpecies()).ToArray();
             var rnd = new Random();
-            var dinosaurs = Enumerable.Range(1, dinosaursCount).Select(id => GenerateDinosaur(id, species[rnd.Next(0, speciesCount)])).ToArray();
+            var dinosaurs = Enumerable.Range(1, dinosaursCount).Select(id => GenerateDinosaur(species[rnd.Next(0, speciesCount)])).ToArray();
 
             await Save(species, dinosaurs);
         }
 
-        private Species GenerateSpecies(int id)
+        private Species GenerateSpecies()
         {
             return _speciesFaker
                 .CustomInstantiator(f =>
                     new Species
                     {
-                        Id = id,
                         FoodType = f.Random.Enum<FoodType>(),
                         Name = f.Random.Word(),
                         Description = f.Lorem.Paragraph(),
                     });
         }
 
-        private Dinosaur GenerateDinosaur(int id, Species species)
+        private Dinosaur GenerateDinosaur(Species species)
         {
             return _dinoFaker
                 .CustomInstantiator(f =>
                     new Dinosaur
                     {
-                        Id = id,
-                        SpeciesId = species.Id,
+                        Species = species,
                         Name = f.Random.Word(),
                     });
         }
 
         private async Task Save(Species[] species, Dinosaur[] dinos)
         {
-            await _speciesRepository.Save(species);
-            await _dinoRepository.Save(dinos);
+            await _dinoRepository.AddSpecies(species);
+            await _dinoRepository.AddDinosaurs(dinos);
+            await _dinoRepository.Commit();
         }
     }
 }
