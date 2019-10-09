@@ -15,3 +15,13 @@ async function loadDinosaurs(count, offset) {
     });
     return await response.json();
 }
+
+function show(dinosaurs) {
+    const area = document.getElementById("dinosaurus-area");
+
+    for (let dinosaur of dinosaurs) {
+        const child = document.createElement('div');
+        child.innerHTML = `<div>Name: ${dinosaur.name}</div>`;
+        area.appendChild(child);
+    }
+}
