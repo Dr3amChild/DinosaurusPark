@@ -20,6 +20,7 @@ namespace DinosaurusPark.DataAccess.Migrations
             Create.Table(DinosaurusTable)
                 .WithColumn(idColumn).AsInt32().PrimaryKey("PK_Dinosaurs").Identity().NotNullable()
                 .WithColumn("SpeciesId").AsInt32().ForeignKey("FK_SpeciesId", SpeciesTable, idColumn).NotNullable()
+                .WithColumn("Gender").AsInt32().NotNullable()
                 .WithColumn("Name").AsString().NotNullable();
         }
 

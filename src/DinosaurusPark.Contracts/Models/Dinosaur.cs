@@ -6,6 +6,8 @@
 
         public string Name { get; set; }
 
+        public Gender Gender { get; set; }
+
         public int SpeciesId { get; set; }
 
         public Species Species { get; set; }

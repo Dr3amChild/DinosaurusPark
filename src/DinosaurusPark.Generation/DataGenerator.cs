@@ -56,6 +56,7 @@ namespace DinosaurusPark.Generation
                     {
                         Species = species,
                         Name = f.Name.FirstName(),
+                        Gender = f.Random.Enum<Gender>(),
                     });
         }
 
