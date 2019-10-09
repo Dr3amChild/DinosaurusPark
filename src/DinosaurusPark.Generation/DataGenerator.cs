@@ -2,6 +2,7 @@
 using DinosaurusPark.Contracts;
 using DinosaurusPark.Contracts.Models;
 using DinosaurusPark.Contracts.Repositories;
+using DinosaurusPark.Extensions;
 using DinosaurusPark.Generation.Exceptions;
 using System;
 using System.Linq;
@@ -42,7 +43,7 @@ namespace DinosaurusPark.Generation
                     new Species
                     {
                         FoodType = f.Random.Enum<FoodType>(),
-                        Name = f.Random.Word(),
+                        Name = string.Join(" ", f.Lorem.Words(2).Select(w => w.FirstUp())),
                         Description = f.Lorem.Paragraph(),
                     });
         }
@@ -54,7 +55,7 @@ namespace DinosaurusPark.Generation
                     new Dinosaur
                     {
                         Species = species,
-                        Name = f.Random.Word(),
+                        Name = f.Name.FirstName(),
                     });
         }
 

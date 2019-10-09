@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\DinosaurusPark.Extensions\DinosaurusPark.Extensions.csproj" />
     <ProjectReference Include="..\DinosaurusPark.Contracts\DinosaurusPark.Contracts.csproj" />
   </ItemGroup>
 
