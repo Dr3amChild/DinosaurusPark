@@ -1,25 +1,29 @@
-﻿using System.Diagnostics;
-using DinosaurusPark.WebApplication.Models;
+﻿using DinosaurusPark.Contracts.Repositories;
+using DinosaurusPark.WebApplication.Requests;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace DinosaurusPark.WebApplication.Controllers
 {
     public class DinosaursController : Controller
     {
+        private readonly IDinoRepository _dinoRepository;
+
+        public DinosaursController(IDinoRepository dinoRepository)
+        {
+            _dinoRepository = dinoRepository;
+        }
+
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        [HttpGet("/all")]
+        public async Task<IActionResult> Get(GetallRequest request)
         {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var result = await _dinoRepository.GetAll(request.Count, request.Offset);
+            return Ok(new { items = result });
         }
     }
 }

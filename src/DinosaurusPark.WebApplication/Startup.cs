@@ -66,7 +66,7 @@ namespace DinosaurusPark.WebApplication
                 .UseCookiePolicy()
                 .UseMvc(routes =>
                     {
-                        routes.MapRoute(name: "default", template: "{controller=Dinisaurs}/{action=Index}/{id?}");
+                        routes.MapRoute(name: "default", template: "{controller=Dinosaurs}/{action=Index}/{id?}");
                     });
 
             if (_settings.Serilog.UseRequestLogging)
