@@ -8,8 +8,6 @@ services:
       dockerfile: tests/DinosaurusPark.IntegrationTests/Dockerfile
     environment:   
       DINOPARK_TESTS_API__URI: http://dinosaurusparkapi
-      DINOPARK_TESTS_DB__URI: mongodb://mongo
-      DINOPARK_TESTS_DB__NAME: tutor
     depends_on:
       - dinosaurusparkapi
 
