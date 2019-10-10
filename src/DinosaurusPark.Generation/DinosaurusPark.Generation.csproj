@@ -4,6 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
     <CodeAnalysisRuleSet>..\..\RuleSet.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -19,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\DinosaurusPark.Extensions\DinosaurusPark.Extensions.csproj" />
+    <ProjectReference Include="..\DinosaurusPark.Extensions\DinosaurusPark.Extensions.csproj" />
     <ProjectReference Include="..\DinosaurusPark.Contracts\DinosaurusPark.Contracts.csproj" />
   </ItemGroup>
 

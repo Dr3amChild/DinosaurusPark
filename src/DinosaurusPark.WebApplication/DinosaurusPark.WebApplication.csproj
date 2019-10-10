@@ -8,10 +8,11 @@
     <LangVersion>default</LangVersion>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
     <CodeAnalysisRuleSet>..\..\RuleSet.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <NoWarn>1701;1702;SA0001</NoWarn>
+    <NoWarn>1701;1702;</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,4 +1,5 @@
-﻿using FluentMigrator;
+﻿#pragma warning disable SA1305
+using FluentMigrator;
 
 namespace DinosaurusPark.DataAccess.Migrations
 {
@@ -31,3 +32,4 @@ namespace DinosaurusPark.DataAccess.Migrations
         }
     }
 }
+#pragma warning restore SA1305
