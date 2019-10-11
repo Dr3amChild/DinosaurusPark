@@ -20,7 +20,7 @@ namespace DinosaurusPark.WebApplication.Controllers
         }
 
         [HttpGet("/all")]
-        public async Task<IActionResult> Get(GetallRequest request)
+        public async Task<IActionResult> Get(GetAllRequest request)
         {
             var result = await _dinoRepository.GetAll(request.Count, request.Offset);
             return Ok(new { items = result });

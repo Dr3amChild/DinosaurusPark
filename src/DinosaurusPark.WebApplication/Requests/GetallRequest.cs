@@ -2,7 +2,7 @@
 
 namespace DinosaurusPark.WebApplication.Requests
 {
-    public class GetallRequest
+    public class GetAllRequest
     {
         [FromQuery]
         public int Count { get; set; }
