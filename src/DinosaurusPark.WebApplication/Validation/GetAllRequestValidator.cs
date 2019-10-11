@@ -3,12 +3,12 @@ using FluentValidation;
 
 namespace DinosaurusPark.WebApplication.Validation
 {
-    public class GetAllRequestValidator : AbstractValidator<GetAllRequest>
+    public class GetAllRequestValidator : BaseValidator<GetAllRequest>
     {
         public GetAllRequestValidator()
         {
-            RuleFor(r => r.Count).NotEmpty().GreaterThan(0).WithErrorCode(ErrorCodes.CountIsNegativeOrZero);
-            RuleFor(r => r.Offset).NotEmpty().GreaterThanOrEqualTo(0).WithErrorCode(ErrorCodes.OffsetIsNegative);
+            RuleFor(r => r.Count).GreaterThan(0).WithErrorCode(ErrorCodes.CountIsNegativeOrZero);
+            RuleFor(r => r.Offset).GreaterThanOrEqualTo(0).WithErrorCode(ErrorCodes.OffsetIsNegative);
         }
     }
 }

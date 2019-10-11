@@ -1,6 +1,8 @@
+using System;
 using System.Net;
 using System.Threading.Tasks;
 using DinosaurusPark.IntegrationTests.Apis;
+using DinosaurusPark.WebApplication.Validation;
 using NUnit.Framework;
 
 namespace DinosaurusPark.IntegrationTests.Tests
@@ -20,6 +22,14 @@ namespace DinosaurusPark.IntegrationTests.Tests
         {
             var result = await _api.GetAll<string>(1, 10);
             Assert.AreEqual(result.StatusCode, HttpStatusCode.OK);
+        }
+
+        [Test]
+        public async Task GetAll_ReturnsBadRequest_If_CountIsNotPositive()
+        {
+            var result = await _api.GetAll<string>(-1, 10);
+            Assert.AreEqual(result.StatusCode, HttpStatusCode.BadRequest);
+            Assert.GreaterOrEqual(result.Error.Content.IndexOf(ErrorCodes.CountIsNegativeOrZero, StringComparison.CurrentCulture), 0);
         }
     }
 }
