@@ -8,6 +8,7 @@ namespace DinosaurusPark.IntegrationTests.Tests
         protected BaseTests()
         {
             var config = new ConfigurationBuilder()
+                .AddJsonFile("testsettings.json", optional: false)
                 .AddEnvironmentVariables("DINOPARK_TESTS_")
                 .Build();
 
