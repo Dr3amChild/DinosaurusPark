@@ -31,5 +31,13 @@ namespace DinosaurusPark.IntegrationTests.Tests
             Assert.AreEqual(result.StatusCode, HttpStatusCode.BadRequest);
             Assert.GreaterOrEqual(result.Error.Content.IndexOf(ErrorCodes.CountIsNegativeOrZero, StringComparison.CurrentCulture), 0);
         }
+
+        [Test]
+        public async Task GetAll_ReturnsBadRequest_If_OffsetIsNegative()
+        {
+            var result = await _api.GetAll<string>(1, -1);
+            Assert.AreEqual(result.StatusCode, HttpStatusCode.BadRequest);
+            Assert.GreaterOrEqual(result.Error.Content.IndexOf(ErrorCodes.OffsetIsNegative, StringComparison.CurrentCulture), 0);
+        }
     }
 }
