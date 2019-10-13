@@ -1,9 +1,9 @@
-using System;
-using System.Net;
-using System.Threading.Tasks;
 using DinosaurusPark.IntegrationTests.Apis;
 using DinosaurusPark.WebApplication.Validation;
 using NUnit.Framework;
+using System;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace DinosaurusPark.IntegrationTests.Tests
 {
