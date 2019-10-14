@@ -21,7 +21,7 @@ namespace DinosaurusPark.Generation
             _dinoRepository = dinoRepository ?? throw new ArgumentNullException(nameof(dinoRepository));
         }
 
-        public async Task Generate(int speciesCount, int dinosaursCount)
+        public async Task<GenerationResult> Generate(int speciesCount, int dinosaursCount)
         {
             if (speciesCount < 0)
                 throw new GenerationException($"{nameof(speciesCount)} must be grater than 0");
@@ -34,6 +34,7 @@ namespace DinosaurusPark.Generation
             var dinosaurs = Enumerable.Range(1, dinosaursCount).Select(id => GenerateDinosaur(species[rnd.Next(0, speciesCount)])).ToArray();
 
             await Save(species, dinosaurs);
+            return new GenerationResult(species, dinosaurs);
         }
 
         private Species GenerateSpecies()

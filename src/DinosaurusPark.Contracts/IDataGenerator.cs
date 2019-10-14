@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using DinosaurusPark.Contracts.Models;
+using System.Threading.Tasks;
 
 namespace DinosaurusPark.Contracts
 {
@@ -7,6 +8,6 @@ namespace DinosaurusPark.Contracts
     /// </summary>
     public interface IDataGenerator
     {
-        Task Generate(int speciesCount, int dinosaursCount);
+        Task<GenerationResult> Generate(int speciesCount, int dinosaursCount);
     }
 }

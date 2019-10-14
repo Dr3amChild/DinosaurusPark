@@ -20,8 +20,8 @@ namespace DinosaurusPark.WebApplication.Controllers
         [ProducesResponseType(200)]
         public async Task<IActionResult> Create(GenerationRequest request)
         {
-            await _generator.Generate(request.Data.SpeciesCount, request.Data.DinosaursCount);
-            return Ok();
+            var result = await _generator.Generate(request.Data.SpeciesCount, request.Data.DinosaursCount);
+            return Ok(result);
         }
     }
 }
