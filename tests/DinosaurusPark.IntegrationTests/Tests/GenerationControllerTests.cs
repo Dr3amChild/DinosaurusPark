@@ -1,5 +1,6 @@
 ﻿using DinosaurusPark.IntegrationTests.Apis;
 using DinosaurusPark.IntegrationTests.Requests;
+using DinosaurusPark.IntegrationTests.Responses;
 using DinosaurusPark.WebApplication.Validation;
 using NUnit.Framework;
 using System;
@@ -29,6 +30,34 @@ namespace DinosaurusPark.IntegrationTests.Tests
 
             var result = await _api.Generate<string>(request);
             Assert.AreEqual(result.StatusCode, HttpStatusCode.OK);
+        }
+
+        [Test]
+        public async Task Generate_ReturnsRequiredSpeciesCount_IfRequestIsCorrect()
+        {
+            const int expectedSpeciesCount = 3;
+            var request = new GenerationRequest
+            {
+                DinosaursCount = 1,
+                SpeciesCount = expectedSpeciesCount,
+            };
+
+            var result = await _api.Generate<GenerationResponse>(request);
+            Assert.AreEqual(result.Content.Species.Count, expectedSpeciesCount);
+        }
+
+        [Test]
+        public async Task Generate_ReturnsRequiredDinosaurusCount_IfRequestIsCorrect()
+        {
+            const int expectedDinosaursCount = 3;
+            var request = new GenerationRequest
+            {
+                DinosaursCount = expectedDinosaursCount,
+                SpeciesCount = 1,
+            };
+
+            var result = await _api.Generate<GenerationResponse>(request);
+            Assert.AreEqual(result.Content.Dinosaurs.Count, expectedDinosaursCount);
         }
 
         [Test]
