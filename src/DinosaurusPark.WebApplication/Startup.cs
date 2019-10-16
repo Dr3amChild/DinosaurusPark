@@ -5,6 +5,7 @@ using DinosaurusPark.DataAccess.Migrations;
 using DinosaurusPark.DataAccess.Repositories;
 using DinosaurusPark.Generation;
 using DinosaurusPark.WebApplication.Filters;
+using DinosaurusPark.WebApplication.Middlewares;
 using DinosaurusPark.WebApplication.Settings;
 using DinosaurusPark.WebApplication.Validation;
 using FluentMigrator.Runner;
@@ -68,6 +69,7 @@ namespace DinosaurusPark.WebApplication
             app
                 .UseStaticFiles()
                 .UseCookiePolicy()
+                .UseMiddleware(typeof(UnhandledExceptionMiddleware))
                 .UseMvc(routes =>
                     {
                         routes.MapRoute(name: "default", template: "{controller=Dinosaurs}/{action=Index}/{id?}");
