@@ -1,13 +1,16 @@
-﻿using DinosaurusPark.WebApplication.Exceptions;
+﻿using DinosaurusPark.DataAccess;
+using DinosaurusPark.WebApplication.Exceptions;
 using DinosaurusPark.WebApplication.Settings;
 using FluentMigrator.Runner;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Npgsql;
+using Polly;
+using Serilog;
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using Serilog;
 
 namespace DinosaurusPark.WebApplication
 {
@@ -22,6 +25,17 @@ namespace DinosaurusPark.WebApplication
 
             InitializeLogger(settings);
             var host = BuildWebHost(config, settings);
+
+            Policy retryPolicy = Policy
+                .Handle<Exception>()
+                .WaitAndRetry(3, attempt => TimeSpan.FromMilliseconds(5000));
+
+            retryPolicy.Execute(() =>
+            {
+                var ctx = host.Services.GetService<DinosaurusContext>();
+                ctx.Database.EnsureCreated();
+            });
+
             host.Services
                 .GetRequiredService<IMigrationRunner>()
                 .MigrateUp();
