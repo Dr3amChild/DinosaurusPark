@@ -11,7 +11,6 @@ namespace DinosaurusPark.DataAccess
         public DinosaurusContext(DbSettings settings)
         {
             _settings = settings ?? throw new ArgumentNullException(nameof(settings));
-            Database.EnsureCreated();
         }
 
         public DbSet<Dinosaur> Dinosaurs { get; set; }

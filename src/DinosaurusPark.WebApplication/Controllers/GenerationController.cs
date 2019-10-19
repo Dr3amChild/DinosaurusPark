@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using DinosaurusPark.Contracts;
+using DinosaurusPark.Contracts.Services;
 using DinosaurusPark.WebApplication.Requests;
 using Microsoft.AspNetCore.Mvc;
 

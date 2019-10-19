@@ -39,7 +39,7 @@ namespace DinosaurusPark.IntegrationTests.Tests
             };
 
             await _generatorApi.Generate<GenerationResponse>(generationRequest);
-            var result = await _dinosaursApi.GetAll<DinosaursResponse>(expectedCount, 0);
+            var result = await _dinosaursApi.GetAll<DinosaursResponse>(1, expectedCount);
             Assert.AreEqual(result.Content.Items.Count, expectedCount);
         }
 
@@ -61,19 +61,19 @@ namespace DinosaurusPark.IntegrationTests.Tests
         }
 
         [Test]
-        public async Task GetAll_ReturnsBadRequest_If_CountIsNotPositive()
-        {
-            var result = await _dinosaursApi.GetAll<string>(-1, 10);
-            Assert.AreEqual(result.StatusCode, HttpStatusCode.BadRequest);
-            Assert.GreaterOrEqual(result.Error.Content.IndexOf(ErrorCodes.CountIsNegativeOrZero, StringComparison.CurrentCulture), 0);
-        }
-
-        [Test]
-        public async Task GetAll_ReturnsBadRequest_If_OffsetIsNegative()
+        public async Task GetAll_ReturnsBadRequest_If_PageSizeNotPositive()
         {
             var result = await _dinosaursApi.GetAll<string>(1, -1);
             Assert.AreEqual(result.StatusCode, HttpStatusCode.BadRequest);
-            Assert.GreaterOrEqual(result.Error.Content.IndexOf(ErrorCodes.OffsetIsNegative, StringComparison.CurrentCulture), 0);
+            Assert.GreaterOrEqual(result.Error.Content.IndexOf(ErrorCodes.PageSizeIsNegativeOrZero, StringComparison.CurrentCulture), 0);
+        }
+
+        [Test]
+        public async Task GetAll_ReturnsBadRequest_If_PageNumberIsNegative()
+        {
+            var result = await _dinosaursApi.GetAll<string>(-1, 1);
+            Assert.AreEqual(result.StatusCode, HttpStatusCode.BadRequest);
+            Assert.GreaterOrEqual(result.Error.Content.IndexOf(ErrorCodes.PageNumberIsNegativeOrZero, StringComparison.CurrentCulture), 0);
         }
     }
 }

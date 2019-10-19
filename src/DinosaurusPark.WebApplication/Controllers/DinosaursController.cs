@@ -1,17 +1,18 @@
-﻿using DinosaurusPark.Contracts.Repositories;
+﻿using DinosaurusPark.Contracts.Services;
 using DinosaurusPark.WebApplication.Requests;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace DinosaurusPark.WebApplication.Controllers
 {
     public class DinosaursController : Controller
     {
-        private readonly IDinoRepository _dinoRepository;
+        private readonly IDinosaursService _dinoService;
 
-        public DinosaursController(IDinoRepository dinoRepository)
+        public DinosaursController(IDinosaursService dinoService)
         {
-            _dinoRepository = dinoRepository;
+            _dinoService = dinoService ?? throw new ArgumentNullException(nameof(dinoService));
         }
 
         public IActionResult Index()
@@ -20,10 +21,10 @@ namespace DinosaurusPark.WebApplication.Controllers
         }
 
         [HttpGet("/all")]
-        public async Task<IActionResult> Get(GetAllRequest request)
+        public async Task<IActionResult> Get(PagingRequest request)
         {
-            var result = await _dinoRepository.GetAll(request.Count, request.Offset);
-            return Ok(new { items = result });
+            var result = await _dinoService.Get(request.PageNumber, request.PageSize);
+            return Ok(result);
         }
     }
 }

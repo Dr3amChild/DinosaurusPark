@@ -4,11 +4,6 @@
         <name>DinosaurusPark.Contracts</name>
     </assembly>
     <members>
-        <member name="T:DinosaurusPark.Contracts.IDataGenerator">
-            <summary>
-            Генератор, заполняющий БД данными.
-            </summary>
-        </member>
         <member name="F:DinosaurusPark.Contracts.Models.FoodType.Herbivorous">
             <summary>
             Травоядный
@@ -32,6 +27,11 @@
         <member name="F:DinosaurusPark.Contracts.Models.Gender.Female">
             <summary>
             Самка
+            </summary>
+        </member>
+        <member name="T:DinosaurusPark.Contracts.Services.IDataGenerator">
+            <summary>
+            Генератор, заполняющий БД данными.
             </summary>
         </member>
     </members>

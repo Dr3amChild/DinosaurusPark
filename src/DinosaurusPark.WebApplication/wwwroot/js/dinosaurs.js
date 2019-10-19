@@ -9,8 +9,8 @@
     return await response.json();
 }
 
-async function loadDinosaurs(count, offset) {
-    const response = await window.fetch(`/all?offset=${offset}&count=${count}`, {
+async function loadDinosaurs(pageNumber, pageSize) {
+    const response = await window.fetch(`/all?pageSize=${pageSize}&pageNumber=${pageNumber}`, {
         method: "GET"
     });
     return await response.json();

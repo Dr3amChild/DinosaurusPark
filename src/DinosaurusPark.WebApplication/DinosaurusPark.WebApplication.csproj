@@ -31,6 +31,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DinosaurusPark.DataAccess\DinosaurusPark.DataAccess.csproj" />
     <ProjectReference Include="..\DinosaurusPark.Generation\DinosaurusPark.Generation.csproj" />
+    <ProjectReference Include="..\DinosaurusPark.Services\DinosaurusPark.Services.csproj" />
   </ItemGroup>
 
 

@@ -36,9 +36,9 @@ namespace DinosaurusPark.WebApplication
                 ctx.Database.EnsureCreated();
             });
 
-            host.Services
-                .GetRequiredService<IMigrationRunner>()
-                .MigrateUp();
+            //host.Services
+            //    .GetRequiredService<IMigrationRunner>()
+            //    .MigrateUp();
 
             await host.RunAsync();
         }

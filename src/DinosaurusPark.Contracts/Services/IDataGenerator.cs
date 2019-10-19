@@ -1,7 +1,7 @@
 ﻿using DinosaurusPark.Contracts.Models;
 using System.Threading.Tasks;
 
-namespace DinosaurusPark.Contracts
+namespace DinosaurusPark.Contracts.Services
 {
     /// <summary>
     /// Генератор, заполняющий БД данными.

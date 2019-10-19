@@ -2,12 +2,12 @@
 
 namespace DinosaurusPark.WebApplication.Requests
 {
-    public class GetAllRequest
+    public class PagingRequest
     {
         [FromQuery]
-        public int Count { get; set; }
+        public int PageNumber { get; set; }
 
         [FromQuery]
-        public int Offset { get; set; }
+        public int PageSize { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Bogus;
-using DinosaurusPark.Contracts;
 using DinosaurusPark.Contracts.Models;
 using DinosaurusPark.Contracts.Repositories;
+using DinosaurusPark.Contracts.Services;
 using DinosaurusPark.Extensions;
 using DinosaurusPark.Generation.Exceptions;
 using System;

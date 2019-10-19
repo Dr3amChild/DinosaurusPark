@@ -48,5 +48,10 @@ namespace DinosaurusPark.DataAccess.Repositories
         {
             _context?.Dispose();
         }
+
+        public async Task<int> GetCount()
+        {
+            return await _context.Dinosaurs.CountAsync();
+        }
     }
 }
