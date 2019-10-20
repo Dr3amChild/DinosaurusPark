@@ -1,4 +1,5 @@
-﻿using DinosaurusPark.Contracts.Repositories;
+﻿using AutoMapper;
+using DinosaurusPark.Contracts.Repositories;
 using DinosaurusPark.Contracts.Services;
 using DinosaurusPark.DataAccess;
 using DinosaurusPark.DataAccess.Migrations;
@@ -6,6 +7,7 @@ using DinosaurusPark.DataAccess.Repositories;
 using DinosaurusPark.Generation;
 using DinosaurusPark.Services;
 using DinosaurusPark.WebApplication.Filters;
+using DinosaurusPark.WebApplication.Mapping;
 using DinosaurusPark.WebApplication.Middlewares;
 using DinosaurusPark.WebApplication.Settings;
 using DinosaurusPark.WebApplication.Validation;
@@ -40,6 +42,7 @@ namespace DinosaurusPark.WebApplication
             });
 
             services
+                .AddAutoMapper(typeof(AppMappingProfile))
                 .AddFluentMigratorCore()
                 .ConfigureRunner(builder => builder
                     .AddPostgres()

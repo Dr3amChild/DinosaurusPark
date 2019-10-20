@@ -5,11 +5,11 @@
         /// <summary>
         /// Самец
         /// </summary>
-        Male,
+        Male = 0,
 
         /// <summary>
         /// Самка
         /// </summary>
-        Female,
+        Female = 1,
     }
 }

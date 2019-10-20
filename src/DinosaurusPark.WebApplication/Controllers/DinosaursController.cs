@@ -1,5 +1,6 @@
 ﻿using DinosaurusPark.Contracts.Services;
 using DinosaurusPark.WebApplication.Requests;
+using DinosaurusPark.WebApplication.Responses;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -23,7 +24,7 @@ namespace DinosaurusPark.WebApplication.Controllers
         [HttpGet("/all")]
         public async Task<IActionResult> Get(PagingRequest request)
         {
-            var result = await _dinoService.Get(request.PageNumber, request.PageSize);
+            var result = await _dinoService.Get<DinosaurResponse>(request.PageNumber, request.PageSize);
             return Ok(result);
         }
     }

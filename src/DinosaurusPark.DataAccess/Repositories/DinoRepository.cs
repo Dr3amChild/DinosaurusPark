@@ -26,7 +26,13 @@ namespace DinosaurusPark.DataAccess.Repositories
 
         public async Task<IReadOnlyCollection<Dinosaur>> GetAll(int count, int offset)
         {
-            return await _context.Dinosaurs.OrderBy(d => d.Id).Skip(offset).Take(count).ToArrayAsync();
+            return await _context
+                    .Dinosaurs
+                    .Include(d => d.Species)
+                    .OrderBy(d => d.Id)
+                    .Skip(offset)
+                    .Take(count)
+                    .ToArrayAsync();
         }
 
         public async Task AddSpecies(params Species[] species)

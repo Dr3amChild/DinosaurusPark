@@ -5,6 +5,6 @@ namespace DinosaurusPark.Contracts.Services
 {
     public interface IDinosaursService
     {
-        Task<PagingResult<Dinosaur>> Get(int pageNumber, int pageSize);
+        Task<PagingResult<TItem>> Get<TItem>(int pageNumber, int pageSize);
     }
 }
