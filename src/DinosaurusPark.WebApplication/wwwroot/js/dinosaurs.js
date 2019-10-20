@@ -21,7 +21,7 @@ function show(dinosaurs) {
 
     for (let dinosaur of dinosaurs) {
         const child = document.createElement('div');
-        child.innerHTML = `<div>Name: ${dinosaur.name}</div>`;
+        child.innerHTML = `<div>Динозавр ${dinosaur.name}. Вид: ${dinosaur.species}</div>`;
         area.appendChild(child);
     }
 }

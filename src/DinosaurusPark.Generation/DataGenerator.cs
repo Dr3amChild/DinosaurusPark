@@ -1,4 +1,5 @@
-﻿using Bogus;
+﻿using AutoMapper;
+using Bogus;
 using DinosaurusPark.Contracts.Models;
 using DinosaurusPark.Contracts.Repositories;
 using DinosaurusPark.Contracts.Services;
@@ -13,12 +14,14 @@ namespace DinosaurusPark.Generation
     public class DataGenerator : IDataGenerator
     {
         private readonly IDinoRepository _dinoRepository;
+        private readonly IMapper _mapper;
         private readonly Faker<Species> _speciesFaker = new Faker<Species>();
-        private readonly Faker<Dinosaur> _dinoFaker = new Faker<Dinosaur>();
+        private readonly Faker<Dinosaur> _dinoFaker = new Faker<Dinosaur>("ru");
 
-        public DataGenerator(IDinoRepository dinoRepository)
+        public DataGenerator(IDinoRepository dinoRepository, IMapper mapper)
         {
             _dinoRepository = dinoRepository ?? throw new ArgumentNullException(nameof(dinoRepository));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         public async Task<GenerationResult> Generate(int speciesCount, int dinosaursCount)
@@ -51,13 +54,15 @@ namespace DinosaurusPark.Generation
 
         private Dinosaur GenerateDinosaur(Species species)
         {
+            var gender = new Faker().Random.Enum<Gender>();
+            var bogusGender = _mapper.Map<Bogus.DataSets.Name.Gender>(gender);
             return _dinoFaker
                 .CustomInstantiator(f =>
                     new Dinosaur
                     {
                         Species = species,
-                        Name = f.Name.FirstName(),
-                        Gender = f.Random.Enum<Gender>(),
+                        Name = f.Name.FirstName(bogusGender),
+                        Gender = gender,
                     });
         }
 
