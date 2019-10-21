@@ -21,8 +21,15 @@ namespace DinosaurusPark.WebApplication.Controllers
             return View();
         }
 
+        [HttpGet("/get")]
+        public async Task<IActionResult> Get(GetByIdRequest request)
+        {
+            var result = await _dinoService.Get<DinosaurResponse>(request.Id);
+            return Ok(result);
+        }
+
         [HttpGet("/all")]
-        public async Task<IActionResult> Get(PagingRequest request)
+        public async Task<IActionResult> GetAll(PagingRequest request)
         {
             var result = await _dinoService.Get<DinosaurResponse>(request.PageNumber, request.PageSize);
             return Ok(result);

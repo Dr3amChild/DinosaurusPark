@@ -19,6 +19,12 @@ namespace DinosaurusPark.Services
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
+        public async Task<TItem> Get<TItem>(int id)
+        {
+            var items = await _dinorepository.GetById(id);
+            return _mapper.Map<TItem>(items);
+        }
+
         public async Task<PagingResult<TItem>> Get<TItem>(int pageNumber, int pageSize)
         {
             int offset = (pageNumber - 1) * pageSize;
