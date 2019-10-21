@@ -28,11 +28,13 @@ function show(dinosaurs) {
 
     for (let dinosaur of dinosaurs) {
         const child = document.createElement("div");
-        child.className = "dinosaur-info";
-        child.innerHTML = `<div>Динозавр ${dinosaur.name}. Вид: ${dinosaur.species}</div>`;
+        child.className = "dinosaur-card";
+        child.innerHTML =
+            `<div class="row-header">Динозавр</div> <div class="row-value">${dinosaur.name}</div>
+             <div class="row-header">Вид:</div> <div class="row-value">${dinosaur.species}</div>`;
 
         const button = document.createElement("button");
-        button.className = "btn btn-info dinusaur-info";
+        button.className = "btn btn-info dinusaur-info-btn";
         button.innerText = "Load info";
         button.onclick = () => onLoadInfoClick(dinosaur.id);
         child.appendChild(button);
