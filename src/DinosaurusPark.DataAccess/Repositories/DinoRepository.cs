@@ -20,7 +20,10 @@ namespace DinosaurusPark.DataAccess.Repositories
 
         public async Task<Dinosaur> GetById(int id)
         {
-            return await _context.Dinosaurs.SingleOrDefaultAsync(d => d.Id == id)
+            return await _context
+                           .Dinosaurs
+                           .Include(d => d.Species)
+                           .SingleOrDefaultAsync(d => d.Id == id)
                    ?? throw new NotFoundException($"Dinosaur with id {id} not found");
         }
 
