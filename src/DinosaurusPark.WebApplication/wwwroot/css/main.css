@@ -1,18 +1,24 @@
 ﻿
 #dinosaurus-area {
     display: grid;
-    grid-gap: 5px;
+    grid-gap: 24px;
     grid-template-columns: repeat(4, 0fr);
 }
 
 .dinosaur-card {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 6px 10px;
+    border-radius: 3px;
+    padding: 8px;
     display: grid;
     grid-gap: 5px;
     grid-gap: 5px;
     grid-template-columns: 80px 150px;
+}
+
+.dinosaur-photo {
+    width: 100%;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    justify-self: center;
 }
 
 .row-header {
