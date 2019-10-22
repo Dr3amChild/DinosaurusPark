@@ -30,7 +30,7 @@ function show(dinosaurs) {
         const child = document.createElement("div");
         child.className = "dinosaur-card alert alert-info";
         child.innerHTML =
-            `<img class='dinosaur-photo' src="img/no-photo.png" />
+            `<img class='dinosaur-photo img-thumbnail' src="img/no-photo.png" />
              <div class="row-header">Динозавр</div>
              <div class="row-value">${dinosaur.name}</div>
              <div class="row-header">Вид</div>
@@ -48,5 +48,12 @@ function show(dinosaurs) {
 
 async function onLoadInfoClick(id) {
     const info = await loadById(id);
-    alert(info.name);
+    setDinosaurInfo(info);
+    $("#dinosaur-modal").modal();
+}
+
+function setDinosaurInfo(info) {
+    document.getElementById("name-value").innerText = info.name;
+    document.getElementById("species-value").innerText = info.species;
+    document.getElementById("description-value").innerText = info.description;
 }

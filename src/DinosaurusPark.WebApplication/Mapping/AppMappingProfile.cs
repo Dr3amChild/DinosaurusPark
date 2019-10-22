@@ -11,7 +11,8 @@ namespace DinosaurusPark.WebApplication.Mapping
             CreateMap<Bogus.DataSets.Name.Gender, Gender>();
 
             CreateMap<Dinosaur, DinosaurResponse>()
-                .ForMember(dst => dst.Species, opt => opt.MapFrom(src => src.Species.Name));
+                .ForMember(dst => dst.Species, opt => opt.MapFrom(src => src.Species.Name))
+                .ForMember(dst => dst.Description, opt => opt.MapFrom(src => src.Species.Description));
         }
     }
 }

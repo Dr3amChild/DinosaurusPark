@@ -11,5 +11,7 @@ namespace DinosaurusPark.WebApplication.Responses
         public Gender Gender { get; set; }
 
         public string Species { get; set; }
+
+        public string Description { get; set; }
     }
 }

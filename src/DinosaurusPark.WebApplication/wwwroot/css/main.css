@@ -32,3 +32,18 @@
     grid-column-start: 1;
     grid-column-end: 3;
 }
+
+.info-header {
+    font-weight: 300 !important;
+    color: #777;
+}
+
+#image-holder {
+    width: 100%;
+    text-align: center;
+}
+
+#info-image {
+    width: 70%;
+    height: auto;
+}
