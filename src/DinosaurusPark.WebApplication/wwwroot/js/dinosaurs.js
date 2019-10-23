@@ -23,10 +23,10 @@ async function loadDinosaurs(pageNumber, pageSize) {
     return await response.json();
 }
 
-function show(dinosaurs) {
+function show(paging) {
     const area = document.getElementById("dinosaurus-area");
-
-    for (let dinosaur of dinosaurs) {
+    area.innerHTML = "";
+    for (let dinosaur of paging.items) {
         const child = document.createElement("div");
         child.className = "dinosaur-card alert alert-info";
         child.innerHTML =
@@ -44,6 +44,30 @@ function show(dinosaurs) {
 
         area.appendChild(child);
     }
+}
+
+function setPaging(paging, onClick) {
+    const pagingList = document.getElementById("paging-list");
+    pagingList.innerHTML = "";
+    for (let pageNum = 1; pageNum <= paging.pagesCount; pageNum++) {
+        const page = document.createElement("li");
+        page.className = pageNum === paging.pageNumber ? "page-item active" : "page-item";
+        page.setAttribute("page-num", pageNum);
+        page.addEventListener("click", onClick);
+        page.innerHTML = `<span class='page-link'>${pageNum}</span>`;
+        pagingList.appendChild(page);
+    }
+}
+
+async function onPageClick(e) {
+    const pageNum = e.currentTarget.getAttribute("page-num");
+    const pageSize = 10; //todo replace with wariable
+    const result = await loadDinosaurs(pageNum, pageSize);
+    const pages = document.getElementsByClassName("page-item");
+    for (let page of pages) {
+        page.className = page.getAttribute("page-num") === pageNum ? "page-item active" : "page-item";
+    }
+    show(result);
 }
 
 async function onLoadInfoClick(id) {

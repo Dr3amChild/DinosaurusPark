@@ -13,6 +13,7 @@ namespace DinosaurusPark.Contracts.Models
             Items = items.ToList();
             PageNumber = pageNumber;
             PageSize = pageSize;
+            PagesCount = totalCount > 0L ? (int)Math.Ceiling(a: (double)totalCount / pageSize) : 0;
             TotalCount = totalCount;
         }
 
@@ -21,6 +22,8 @@ namespace DinosaurusPark.Contracts.Models
         public int PageNumber { get; }
 
         public int PageSize { get; }
+
+        public int PagesCount { get; set; }
 
         public int TotalCount { get; }
     }
