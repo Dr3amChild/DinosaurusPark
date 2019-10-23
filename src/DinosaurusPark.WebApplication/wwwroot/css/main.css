@@ -1,4 +1,14 @@
 ﻿
+#no-data-alert {
+    padding: 8px 16px;
+    width: 60%;
+    margin: 2% 20%;
+}
+
+.form-label {
+    font-weight: 300;
+}
+
 #dinosaurus-area {
     display: grid;
     grid-gap: 12px 24px;

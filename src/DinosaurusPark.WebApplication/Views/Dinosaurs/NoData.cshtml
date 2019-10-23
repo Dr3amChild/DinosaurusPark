@@ -1,7 +1,15 @@
 ﻿
-<div id="no-data-alert" class="alert alert-info alert-dismissible fade show" role="alert">
-    There is no data in database. But you can generate it.
-    <button id="generate-btn" type="button" class="accept-policy close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">Generate</span>
-    </button>
-</div>
+    <div id="no-data-alert" class="card">
+        <h5 class="card-title">Динозавров пока нет. Но вы можете их сгенерировать.</h5>
+        
+        <div class="form-group">
+            <label class="form-label" for="species-count-text">Количество видов:</label>
+            <input type="text" class="form-control" id="species-count-text" aria-describedby="emailHelp" placeholder="Введите значение" value="10" >            
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="dinosaurs-count-text">Количество динозавров:</label>
+            <input type="text" class="form-control" id="dinosaurs-count-text" placeholder="Введите значение" value="100">
+        </div>
+
+        <button id="generate-btn" type="button" class="btn btn-info">Сгенерировать</button>
+    </div>
