@@ -30,7 +30,7 @@ function show(paging) {
         const child = document.createElement("div");
         child.className = "dinosaur-card alert alert-info";
         child.innerHTML =
-            `<img class='dinosaur-photo img-thumbnail' src="img/no-photo.png" />
+            `<img class='dinosaur-photo' src="img/no-photo.png" />
              <div class="row-header">Динозавр</div>
              <div class="row-value">${dinosaur.name}</div>
              <div class="row-header">Вид</div>
