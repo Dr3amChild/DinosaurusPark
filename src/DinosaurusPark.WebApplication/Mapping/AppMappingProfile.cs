@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DinosaurusPark.Contracts.Models;
+using DinosaurusPark.Extensions;
 using DinosaurusPark.WebApplication.Responses;
 
 namespace DinosaurusPark.WebApplication.Mapping
@@ -12,6 +13,7 @@ namespace DinosaurusPark.WebApplication.Mapping
 
             CreateMap<Dinosaur, DinosaurResponse>()
                 .ForMember(dst => dst.Species, opt => opt.MapFrom(src => src.Species.Name))
+                .ForMember(dst => dst.Gender, opt => opt.MapFrom(src => src.Gender.GetDescription()))
                 .ForMember(dst => dst.Description, opt => opt.MapFrom(src => src.Species.Description));
         }
     }

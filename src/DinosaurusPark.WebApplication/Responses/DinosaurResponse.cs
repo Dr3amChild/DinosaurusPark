@@ -8,7 +8,7 @@ namespace DinosaurusPark.WebApplication.Responses
 
         public string Name { get; set; }
 
-        public Gender Gender { get; set; }
+        public string Gender { get; set; }
 
         public string Species { get; set; }
 
