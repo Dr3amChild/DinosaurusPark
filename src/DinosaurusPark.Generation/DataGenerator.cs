@@ -63,6 +63,9 @@ namespace DinosaurusPark.Generation
                         Species = species,
                         Name = f.Name.FirstName(bogusGender),
                         Gender = gender,
+                        Age = f.Random.Int(1, 100),
+                        Weight = f.Random.Int(1, 3000),
+                        Height = f.Random.Int(1, 500),
                     });
         }
 

@@ -22,7 +22,10 @@ namespace DinosaurusPark.DataAccess.Migrations
                 .WithColumn(idColumn).AsInt32().PrimaryKey("PK_Dinosaurs").Identity().NotNullable()
                 .WithColumn("SpeciesId").AsInt32().ForeignKey("FK_SpeciesId", SpeciesTable, idColumn).NotNullable()
                 .WithColumn("Gender").AsInt32().NotNullable()
-                .WithColumn("Name").AsString().NotNullable();
+                .WithColumn("Name").AsString().NotNullable()
+                .WithColumn("Age").AsInt32().NotNullable()
+                .WithColumn("Height").AsInt32().NotNullable()
+                .WithColumn("Weight").AsInt32().NotNullable();
         }
 
         public override void Down()

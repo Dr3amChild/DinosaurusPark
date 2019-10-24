@@ -14,6 +14,7 @@ namespace DinosaurusPark.WebApplication.Mapping
             CreateMap<Dinosaur, DinosaurResponse>()
                 .ForMember(dst => dst.Species, opt => opt.MapFrom(src => src.Species.Name))
                 .ForMember(dst => dst.Gender, opt => opt.MapFrom(src => src.Gender.GetDescription()))
+                .ForMember(dst => dst.FoodType, opt => opt.MapFrom(src => src.Species.FoodType.GetDescription()))
                 .ForMember(dst => dst.Description, opt => opt.MapFrom(src => src.Species.Description));
         }
     }
