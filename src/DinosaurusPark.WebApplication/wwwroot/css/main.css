@@ -32,14 +32,17 @@
 
 .row-header {
     font-weight: bold;
+    font-size: 14px;
 }
 
 .row-value {
+    font-size: 14px;
 }
 
 .dinusaur-info-btn {
     grid-column-start: 1;
     grid-column-end: 3;
+    margin-top: 5px;
 }
 
 .info-header {
