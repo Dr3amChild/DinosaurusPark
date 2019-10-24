@@ -2,6 +2,21 @@
 {
     public class Dinosaur
     {
+        public Dinosaur()
+        {
+        }
+
+        public Dinosaur(Dinosaur dinosaur)
+        {
+            Id = dinosaur.Id;
+            Name = dinosaur.Name;
+            Species = new Species
+            {
+                Id = dinosaur.SpeciesId,
+                Name = dinosaur.Species.Name,
+            };
+        }
+
         public int Id { get; set; }
 
         public string Name { get; set; }

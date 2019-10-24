@@ -35,6 +35,7 @@ namespace DinosaurusPark.DataAccess.Repositories
                     .OrderBy(d => d.Id)
                     .Skip(offset)
                     .Take(count)
+                    .Select(d => new Dinosaur(d))
                     .ToArrayAsync();
         }
 

@@ -11,8 +11,11 @@ namespace DinosaurusPark.WebApplication.Mapping
         {
             CreateMap<Bogus.DataSets.Name.Gender, Gender>();
 
+            CreateMap<Dinosaur, SimpleDinosaurResponse>()
+                .ForMember(dst => dst.Species, opt => opt.MapFrom(src => src.Species.Name));
+
             CreateMap<Dinosaur, DinosaurResponse>()
-                .ForMember(dst => dst.Species, opt => opt.MapFrom(src => src.Species.Name))
+                .IncludeBase<Dinosaur, SimpleDinosaurResponse>()
                 .ForMember(dst => dst.Gender, opt => opt.MapFrom(src => src.Gender.GetDescription()))
                 .ForMember(dst => dst.FoodType, opt => opt.MapFrom(src => src.Species.FoodType.GetDescription()))
                 .ForMember(dst => dst.Description, opt => opt.MapFrom(src => src.Species.Description));

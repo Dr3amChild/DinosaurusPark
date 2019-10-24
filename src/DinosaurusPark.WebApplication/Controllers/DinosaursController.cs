@@ -31,7 +31,7 @@ namespace DinosaurusPark.WebApplication.Controllers
         [HttpGet("/all")]
         public async Task<IActionResult> GetAll(PagingRequest request)
         {
-            var result = await _dinoService.Get<DinosaurResponse>(request.PageNumber, request.PageSize);
+            var result = await _dinoService.Get<SimpleDinosaurResponse>(request.PageNumber, request.PageSize);
             return Ok(result);
         }
     }
