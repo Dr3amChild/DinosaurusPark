@@ -13,15 +13,16 @@ using DinosaurusPark.WebApplication.Settings;
 using DinosaurusPark.WebApplication.Validation;
 using FluentMigrator.Runner;
 using FluentValidation.AspNetCore;
+using JavaScriptEngineSwitcher.ChakraCore;
+using JavaScriptEngineSwitcher.Extensions.MsDependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.FileProviders;
+using React.AspNet;
 using Serilog;
 using System;
-using System.Reflection;
 
 namespace DinosaurusPark.WebApplication
 {
@@ -65,6 +66,11 @@ namespace DinosaurusPark.WebApplication
                 .AddMvc(opts => { opts.Filters.Add(new ValidationFilterAttribute()); })
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<PagingRequestValidator>())
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>()
+                .AddReact()
+                .AddJsEngineSwitcher(options => options.DefaultEngineName = ChakraCoreJsEngine.EngineName)
+                .AddChakraCore();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -82,6 +88,10 @@ namespace DinosaurusPark.WebApplication
                 .UseStaticFiles()
                 .UseCookiePolicy()
                 .UseMiddleware(typeof(UnhandledExceptionMiddleware))
+                .UseReact(config =>
+                {
+                    config.LoadBabel = true;
+                })
                 .UseMvc(routes =>
                     {
                         routes.MapRoute(name: "default", template: "{controller=Dinosaurs}/{action=Index}/{id?}");
