@@ -18,17 +18,21 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Serilog;
 using System;
+using System.Reflection;
 
 namespace DinosaurusPark.WebApplication
 {
     internal class Startup
     {
         private readonly AppSettings _settings;
+        private readonly IHostingEnvironment _env;
 
-        public Startup(AppSettings settings)
+        public Startup(IHostingEnvironment env, AppSettings settings)
         {
+            _env = env ?? throw new ArgumentNullException(nameof(env));
             _settings = settings ?? throw new ArgumentNullException(nameof(settings));
         }
 
@@ -51,8 +55,11 @@ namespace DinosaurusPark.WebApplication
                     .For.Migrations())
                 .AddSingleton(_settings)
                 .AddSingleton(_settings.Db)
+                .AddSingleton(_settings.Files)
                 .AddScoped<DinosaurusContext>()
                 .AddScoped<IDinoRepository, DinoRepository>()
+                .AddSingleton(_env.ContentRootFileProvider)
+                .AddScoped<IImageProvider, ImageProvider>()
                 .AddScoped<IDataGenerator, DataGenerator>()
                 .AddScoped<IDinosaursService, DinosaursService>()
                 .AddMvc(opts => { opts.Filters.Add(new ValidationFilterAttribute()); })

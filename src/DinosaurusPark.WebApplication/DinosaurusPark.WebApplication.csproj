@@ -47,7 +47,7 @@
 
 
   <ItemGroup>
-    <Folder Include="wwwroot\img\" />
+    <Folder Include="wwwroot\img\dinosaurs\" />
   </ItemGroup>
 
 </Project>

@@ -10,6 +10,7 @@
         {
             Id = dinosaur.Id;
             Name = dinosaur.Name;
+            Image = dinosaur.Image;
             Species = new Species
             {
                 Id = dinosaur.SpeciesId,
@@ -28,6 +29,8 @@
         public int Height { get; set; }
 
         public int Weight { get; set; }
+
+        public string Image { get; set; }
 
         public int SpeciesId { get; set; }
 

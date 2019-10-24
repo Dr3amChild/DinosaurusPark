@@ -6,6 +6,7 @@ using DinosaurusPark.Contracts.Services;
 using DinosaurusPark.Extensions;
 using DinosaurusPark.Generation.Exceptions;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,13 +15,15 @@ namespace DinosaurusPark.Generation
     public class DataGenerator : IDataGenerator
     {
         private readonly IDinoRepository _dinoRepository;
+        private readonly IImageProvider _imageProvider;
         private readonly IMapper _mapper;
         private readonly Faker<Species> _speciesFaker = new Faker<Species>();
         private readonly Faker<Dinosaur> _dinoFaker = new Faker<Dinosaur>("ru");
 
-        public DataGenerator(IDinoRepository dinoRepository, IMapper mapper)
+        public DataGenerator(IDinoRepository dinoRepository, IImageProvider imageProvider, IMapper mapper)
         {
             _dinoRepository = dinoRepository ?? throw new ArgumentNullException(nameof(dinoRepository));
+            _imageProvider = imageProvider ?? throw new ArgumentNullException(nameof(_imageProvider));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
@@ -34,7 +37,8 @@ namespace DinosaurusPark.Generation
 
             var species = Enumerable.Range(1, speciesCount).Select(i => GenerateSpecies()).ToArray();
             var rnd = new Random();
-            var dinosaurs = Enumerable.Range(1, dinosaursCount).Select(id => GenerateDinosaur(species[rnd.Next(0, speciesCount)])).ToArray();
+            var images = _imageProvider.GetPaths();
+            var dinosaurs = Enumerable.Range(1, dinosaursCount).Select(id => GenerateDinosaur(species[rnd.Next(0, speciesCount)], images)).ToArray();
 
             await Save(species, dinosaurs);
             return new GenerationResult(species, dinosaurs);
@@ -52,7 +56,7 @@ namespace DinosaurusPark.Generation
                     });
         }
 
-        private Dinosaur GenerateDinosaur(Species species)
+        private Dinosaur GenerateDinosaur(Species species, IReadOnlyList<string> images)
         {
             var gender = new Faker().Random.Enum<Gender>();
             var bogusGender = _mapper.Map<Bogus.DataSets.Name.Gender>(gender);
@@ -66,6 +70,7 @@ namespace DinosaurusPark.Generation
                         Age = f.Random.Int(1, 100),
                         Weight = f.Random.Int(1, 3000),
                         Height = f.Random.Int(1, 500),
+                        Image = images[f.Random.Int(1, images.Count - 1)],
                     });
         }
 

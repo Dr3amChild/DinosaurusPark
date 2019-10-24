@@ -30,7 +30,7 @@ function show(paging) {
         const child = document.createElement("div");
         child.className = "dinosaur-card alert alert-info";
         child.innerHTML =
-            `<img class='dinosaur-photo' src="img/no-photo.png" />
+            `<img class='dinosaur-photo' src="${dinosaur.image}" />
              <div class="row-header">Динозавр</div>
              <div class="row-value">${dinosaur.name}</div>
              <div class="row-header">Вид</div>
@@ -78,6 +78,7 @@ async function onLoadInfoClick(id) {
 
 function setDinosaurInfo(info) {
     document.getElementById("name-value").innerText = info.name;
+    document.getElementById("info-image").setAttribute("src", info.image);
     document.getElementById("species-value").innerText = info.species;
     document.getElementById("gender-value").innerText = info.gender;
     document.getElementById("age-value").innerText = info.age;
