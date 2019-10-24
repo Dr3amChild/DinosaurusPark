@@ -1,5 +1,6 @@
 ﻿using DinosaurusPark.WebApplication.Validation;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Net;
@@ -9,18 +10,20 @@ namespace DinosaurusPark.WebApplication.Middlewares
 {
     public class UnhandledExceptionMiddleware
     {
-        private readonly RequestDelegate next;
+        private readonly RequestDelegate _next;
+        private readonly ILogger<UnhandledExceptionMiddleware> _logger;
 
-        public UnhandledExceptionMiddleware(RequestDelegate next)
+        public UnhandledExceptionMiddleware(RequestDelegate next, ILogger<UnhandledExceptionMiddleware> logger)
         {
-            this.next = next;
+            _next = next;
+            _logger = logger;
         }
 
         public async Task Invoke(HttpContext context)
         {
             try
             {
-                await next(context);
+                await _next(context);
             }
             catch (Exception ex)
             {
@@ -28,12 +31,13 @@ namespace DinosaurusPark.WebApplication.Middlewares
             }
         }
 
-        private static Task HandleExceptionAsync(HttpContext context, Exception ex)
+        private Task HandleExceptionAsync(HttpContext context, Exception ex)
         {
             var code = HttpStatusCode.InternalServerError;
             var result = JsonConvert.SerializeObject(new { error = ErrorCodes.InternalServerError });
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)code;
+            _logger.LogError(ex, "Unhandled error occured");
             return context.Response.WriteAsync(result);
         }
     }
