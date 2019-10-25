@@ -10,11 +10,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.0/umd/react-dom.development.js"></script>
 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
+<script type="text/babel" src="/js/dinosaur-modal/description.jsx"></script>
+<script type="text/babel" src="/js/dinosaur-modal/field.jsx"></script>
+<script type="text/babel" src="/js/dinosaur-modal/row.jsx"></script>
+<script type="text/babel" src="/js/dinosaur-modal/photo.jsx"></script>
+<script type="text/babel" src="/js/dinosaur-modal/modal.jsx"></script>
+
 @{ await Html.RenderPartialAsync("NoData"); }
-@{ await Html.RenderPartialAsync("DinosaurModal"); }
 
-<div id="dinosaurus-area">
-
-</div>
+<div id="dinosaur-modal" class="modal fade"></div>
+<div id="for-jsx"></div>
+<div id="dinosaurus-area"></div>
 
 @{ await Html.RenderPartialAsync("Paging"); }

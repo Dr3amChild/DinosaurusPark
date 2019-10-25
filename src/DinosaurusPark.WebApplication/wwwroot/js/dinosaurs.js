@@ -72,18 +72,6 @@ async function onPageClick(e) {
 
 async function onLoadInfoClick(id) {
     const info = await loadById(id);
-    setDinosaurInfo(info);
+    window.ReactDOM.render(window.React.createElement(DinosaurModal, { modalHeader: "Подробная информация", buttonTitle: "Закрыть", info }), document.getElementById("dinosaur-modal"));
     $("#dinosaur-modal").modal();
-}
-
-function setDinosaurInfo(info) {
-    document.getElementById("name-value").innerText = info.name;
-    document.getElementById("info-image").setAttribute("src", info.image);
-    document.getElementById("species-value").innerText = info.species;
-    document.getElementById("gender-value").innerText = info.gender;
-    document.getElementById("age-value").innerText = info.age;
-    document.getElementById("height-value").innerText = info.height;
-    document.getElementById("weight-value").innerText = info.weight;
-    document.getElementById("foodtype-value").innerText = info.foodType;
-    document.getElementById("description-value").innerText = info.description;
 }
