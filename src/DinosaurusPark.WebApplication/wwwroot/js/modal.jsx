@@ -31,3 +31,53 @@
         );
     }
 }
+
+class Photo extends React.Component {
+    render() {
+        return (
+            <div id="image-holder">
+                <img className="img-thumbnail" src={this.props.source} />
+            </div>
+        );
+    }
+}
+
+class Row extends React.Component {
+    render() {
+        return (
+            <div className="row">
+                {this.createItems()}
+            </div>
+        );
+    }
+
+    createItems() {
+        const items = [];
+        for (let name of this.props.names) {
+            items.push(<DinosaurField header={name.title} value={this.props.info[name.key]} />);
+        }
+        return items;
+    }
+}
+
+class DinosaurField extends React.Component {
+    render() {
+        return (
+            <div className="col-sm">
+                <div className="info-header">{this.props.header}</div>
+                <p>{this.props.value}</p>
+            </div>
+        );
+    }
+}
+
+class Description extends React.Component {
+    render() {
+        return (
+            <div>
+                <div className="info-header">{this.props.header}</div>
+                <p>{this.props.value}</p>
+            </div>
+        );
+    }
+}
