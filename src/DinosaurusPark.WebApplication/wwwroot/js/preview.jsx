@@ -31,12 +31,10 @@ class Preview extends React.Component {
 
 class PreviewRow extends React.Component {
     render() {
-        return (
-            <div>
-                <div className="row-header">{this.props.title}</div>
-                <div className="row-value">{this.props.value}</div>
-            </div>
-        );
+        return [
+            <div key="1" className="row-header">{this.props.title}</div>,
+            <div key="2" className="row-value">{this.props.value}</div>          
+        ];
     }
 }
 
@@ -48,7 +46,7 @@ class Button extends React.Component {
     }
 
     async onLoadInfoClick(id) {
-        const info = await loadById(id);
+        const info = await new DinosaursApi(10).getById(id); //todo replace with class member
         ReactDOM.render(React.createElement(DinosaurModal,
             {
                 modalHeader: "Подробная информация",

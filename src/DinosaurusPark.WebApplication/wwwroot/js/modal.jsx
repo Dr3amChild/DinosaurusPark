@@ -54,7 +54,7 @@ class Row extends React.Component {
     createItems() {
         const items = [];
         for (let name of this.props.names) {
-            items.push(<DinosaurField header={name.title} value={this.props.info[name.key]} />);
+            items.push(<DinosaurField key={name.key} header={name.title} value={this.props.info[name.key]} />);
         }
         return items;
     }
