@@ -1,4 +1,7 @@
-﻿async function generate(speciesCount, dinosaursCount) {
+﻿const React = window.React;
+const ReactDOM = window.ReactDOM;
+
+async function generate(speciesCount, dinosaursCount) {
     const response = await window.fetch("/generation/create", {
         method: "POST",
         headers: {
@@ -25,25 +28,8 @@ async function loadDinosaurs(pageNumber, pageSize) {
 
 function show(paging) {
     const area = document.getElementById("dinosaurus-area");
-    area.innerHTML = "";
-    for (let dinosaur of paging.items) {
-        const child = document.createElement("div");
-        child.className = "dinosaur-card alert alert-info";
-        child.innerHTML =
-            `<img class='dinosaur-photo' src="${dinosaur.image}" />
-             <div class="row-header">Динозавр</div>
-             <div class="row-value">${dinosaur.name}</div>
-             <div class="row-header">Вид</div>
-             <div class="row-value">${dinosaur.species}</div>`;
-
-        const button = document.createElement("button");
-        button.className = "btn btn-info dinusaur-info-btn";
-        button.innerText = "Подробнее";
-        button.onclick = () => onLoadInfoClick(dinosaur.id);
-        child.appendChild(button);
-
-        area.appendChild(child);
-    }
+    ReactDOM.unmountComponentAtNode(area);
+    ReactDOM.render(React.createElement(Cards, { items: paging.items }), area);
 }
 
 function setPaging(paging, onClick) {
@@ -68,10 +54,4 @@ async function onPageClick(e) {
         page.className = page.getAttribute("page-num") === pageNum ? "page-item active" : "page-item";
     }
     show(result);
-}
-
-async function onLoadInfoClick(id) {
-    const info = await loadById(id);
-    window.ReactDOM.render(window.React.createElement(DinosaurModal, { modalHeader: "Подробная информация", buttonTitle: "Закрыть", info }), document.getElementById("dinosaur-modal"));
-    $("#dinosaur-modal").modal();
 }
