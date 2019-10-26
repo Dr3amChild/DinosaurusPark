@@ -13,13 +13,12 @@
 <script type="text/babel" src="/js/modal.jsx"></script>
 <script type="text/babel" src="/js/preview.jsx"></script>
 <script type="text/babel" src="/js/paging.jsx"></script>
+<script type="text/babel" src="/js/generation.jsx"></script>
 
-@{ await Html.RenderPartialAsync("NoData"); }
+<div id="no-data-alert" class="card"></div>
 
 <div id="dinosaur-modal" class="modal fade"></div>
 <div id="for-jsx"></div>
 <div id="dinosaurus-area"></div>
 
 <nav id="paging-nav"></nav>
-
-@*@{ await Html.RenderPartialAsync("Paging"); }*@
