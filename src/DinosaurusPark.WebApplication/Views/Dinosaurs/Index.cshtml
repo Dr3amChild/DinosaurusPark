@@ -12,6 +12,7 @@
 
 <script type="text/babel" src="/js/modal.jsx"></script>
 <script type="text/babel" src="/js/preview.jsx"></script>
+<script type="text/babel" src="/js/paging.jsx"></script>
 
 @{ await Html.RenderPartialAsync("NoData"); }
 
@@ -19,4 +20,6 @@
 <div id="for-jsx"></div>
 <div id="dinosaurus-area"></div>
 
-@{ await Html.RenderPartialAsync("Paging"); }
+<nav id="paging-nav"></nav>
+
+@*@{ await Html.RenderPartialAsync("Paging"); }*@
