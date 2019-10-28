@@ -4,6 +4,7 @@ using DinosaurusPark.IntegrationTests.Responses;
 using DinosaurusPark.WebApplication.Validation;
 using NUnit.Framework;
 using System;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -74,6 +75,47 @@ namespace DinosaurusPark.IntegrationTests.Tests
             var result = await _dinosaursApi.GetAll<string>(-1, 1);
             Assert.AreEqual(result.StatusCode, HttpStatusCode.BadRequest);
             Assert.GreaterOrEqual(result.Error.Content.IndexOf(ErrorCodes.PageNumberIsNegativeOrZero, StringComparison.CurrentCulture), 0);
+        }
+
+        [Test]
+        public async Task GetById_ReturnsOk_IfRequestIsCorrect()
+        {
+            var generationRequest = new GenerationRequest
+            {
+                SpeciesCount = 1,
+                DinosaursCount = 1,
+            };
+
+            var generationResult = await _generatorApi.Generate<GenerationResponse>(generationRequest);
+            var dinosaur = generationResult.Content.Dinosaurs.First();
+
+            var result = await _dinosaursApi.GetById<string>(dinosaur.Id);
+            Assert.AreEqual(result.StatusCode, HttpStatusCode.OK);
+        }
+
+        [Test]
+        public async Task GetById_ReturnsExpectedResponse_IfRequestIsCorrect()
+        {
+            var generationRequest = new GenerationRequest
+            {
+                SpeciesCount = 1,
+                DinosaursCount = 1,
+            };
+
+            var generationResult = await _generatorApi.Generate<GenerationResponse>(generationRequest);
+            var dinosaur = generationResult.Content.Dinosaurs.First();
+
+            var result = await _dinosaursApi.GetById<DinosaurResponse>(dinosaur.Id);
+            Assert.AreEqual(result.Content.Id, dinosaur.Id);
+            Assert.AreEqual(result.Content.Name, dinosaur.Name);
+        }
+
+        [Test]
+        public async Task GetById_ReturnsBadRequest_IfIdIsEmpty()
+        {
+            var result = await _dinosaursApi.GetById<string>(null);
+            Assert.AreEqual(result.StatusCode, HttpStatusCode.BadRequest);
+            Assert.GreaterOrEqual(result.Error.Content.IndexOf(ErrorCodes.IdIsEmpty, StringComparison.CurrentCulture), 0);
         }
     }
 }

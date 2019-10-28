@@ -8,5 +8,8 @@ namespace DinosaurusPark.IntegrationTests.Apis
     {
         [Get("/all?pageNumber={pageNumber}&pageSize={pageSize}")]
         Task<ApiResponse<T>> GetAll<T>(int pageNumber, int pageSize);
+
+        [Get("/get?id={id}")]
+        Task<ApiResponse<T>> GetById<T>(int? id);
     }
 }
