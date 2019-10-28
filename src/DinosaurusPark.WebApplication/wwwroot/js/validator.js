@@ -10,7 +10,8 @@
             if (isValid) {
                 input.classList.remove(this.errorClass);
             } else {
-                input.classList.push(this.errorClass);
+                input.classList.add(this.errorClass);
+                $(input).tooltip({ title: input.getAttribute("message"), placement: "right" }).tooltip("show");
                 result = false;
             }
         }
