@@ -17,7 +17,7 @@
                         title="Количество видов:"
                         text={this.props.species}
                         errorClass={this.errorClassName}
-                        message = {`Поле может содержать только целочисленные значения в диапазоне от 1 до 100`}
+            message={`Поле может содержать только целые числа от 1 до 100`}
                         placeholder="Введите значение" />);
         items.push(<FormGroup
                         key="3"
@@ -51,7 +51,7 @@ class FormGroup extends React.Component {
                     id={this.props.id}
                     type="text"
                     className="form-control"
-                    message={`Поле может содержать только целочисленные значения в диапазоне от 1 до 100`}
+                    message={`Поле может содержать только целые числа от 1 до 1000`}
                     onChange={this.onChange.bind(this)}
                     placeholder={this.props.placeholder}
                     defaultValue={this.props.text}
