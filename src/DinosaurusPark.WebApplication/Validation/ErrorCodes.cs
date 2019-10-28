@@ -8,5 +8,6 @@
         public const string BodyIsNull = "Body is null";
         public const string SpeciesCountIsNegativeOrZero = "SpeciesCount is negative or  zero";
         public const string DinosaursCountIsNegativeOrZero = "DinosaursCount is negative or  zero";
+        public const string IdIsEmpty = "Id is empty";
     }
 }
