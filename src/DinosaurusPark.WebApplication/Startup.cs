@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using React.AspNet;
 using Serilog;
 using System;
@@ -29,9 +30,9 @@ namespace DinosaurusPark.WebApplication
     internal class Startup
     {
         private readonly AppSettings _settings;
-        private readonly IHostingEnvironment _env;
+        private readonly IWebHostEnvironment _env;
 
-        public Startup(IHostingEnvironment env, AppSettings settings)
+        public Startup(IWebHostEnvironment env, AppSettings settings)
         {
             _env = env ?? throw new ArgumentNullException(nameof(env));
             _settings = settings ?? throw new ArgumentNullException(nameof(settings));
@@ -65,7 +66,7 @@ namespace DinosaurusPark.WebApplication
                 .AddScoped<IDinosaursService, DinosaursService>()
                 .AddMvc(opts => { opts.Filters.Add(new ValidationFilterAttribute()); })
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<PagingRequestValidator>())
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>()
                 .AddReact()
@@ -73,7 +74,7 @@ namespace DinosaurusPark.WebApplication
                 .AddChakraCore();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -92,10 +93,12 @@ namespace DinosaurusPark.WebApplication
                 {
                     config.LoadBabel = true;
                 })
-                .UseMvc(routes =>
-                    {
-                        routes.MapRoute(name: "default", template: "{controller=Dinosaurs}/{action=Index}/{id?}");
-                    });
+                .UseRouting()
+                .UseEndpoints(endpoints =>
+                {
+                    endpoints.MapControllers();
+                    endpoints.MapControllerRoute("default", "{controller=Dinosaurs}/{action=Index}/{id?}");
+                });
 
             if (_settings.Serilog.UseRequestLogging)
             {
