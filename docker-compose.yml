@@ -1,8 +1,8 @@
 version: '3.4'
 
 services:
-  dinosauruspark:
-    image: dinosauruspark
+  dinosauruspark.web:
+    image: dinosauruspark.web
     build:
       context: .
       dockerfile: src/DinosaurusPark.WebApplication/Dockerfile

@@ -6,9 +6,12 @@
     <ProjectGuid>48b68ea8-b74b-414e-926b-ab14edff35fb</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}</DockerServiceUrl>
-    <DockerServiceName>dinosauruspark.webapplication</DockerServiceName>
+    <DockerServiceName>dinosauruspark.web</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
+	<None Include="docker-compose.override.yml">
+      <DependentUpon>docker-compose.yml</DependentUpon>
+    </None>
     <None Include="docker-compose.yml" />
     <None Include=".dockerignore" />
   </ItemGroup>
