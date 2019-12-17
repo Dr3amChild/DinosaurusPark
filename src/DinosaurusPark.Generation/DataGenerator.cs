@@ -51,9 +51,29 @@ namespace DinosaurusPark.Generation
                     new Species
                     {
                         FoodType = f.Random.Enum<FoodType>(),
-                        Name = string.Join(" ", f.Lorem.Words(2).Select(w => w.FirstUp())),
+                        Name = Latinize(f),
                         Description = f.Lorem.Paragraph(),
                     });
+        }
+
+        private string Latinize(Faker faker)
+        {
+            static string ModifyName(string input, string postfix)
+            {
+                if (!input.EndsWith(postfix))
+                    input += postfix;
+                return input;
+            }
+
+            var words = faker.Lorem.Words(2);
+            const string namePostfix = "us";
+            if (!words[0].EndsWith(namePostfix))
+                words[0] = words[0] + namePostfix;
+
+            words[0] = ModifyName(words[0], "us");
+            words[1] = ModifyName(words[1], "is");
+
+            return string.Join(" ", words.Select(w => w.FirstUp()));
         }
 
         private Dinosaur GenerateDinosaur(Species species, IReadOnlyList<string> images)
