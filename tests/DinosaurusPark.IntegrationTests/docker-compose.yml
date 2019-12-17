@@ -30,11 +30,10 @@ services:
       - "5006:80"
 
   pg:
-    image: postgres:9.6
+    image: postgres:10.11
     ports:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
-      - ./10-init-pg.sql:/docker-entrypoint-initdb.d/10-init-pg.sql
 volumes:
   pgdata:

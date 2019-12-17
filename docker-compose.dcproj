@@ -3,13 +3,13 @@
   <PropertyGroup Label="Globals">
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
-    <ProjectGuid>48b68ea8-b74b-414e-926b-ab14edff35fb</ProjectGuid>
+    <ProjectGuid>cce80e97-888e-4022-9227-6001dae4345c</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}</DockerServiceUrl>
     <DockerServiceName>dinosauruspark.web</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
-	<None Include="docker-compose.override.yml">
+    <None Include="docker-compose.override.yml">
       <DependentUpon>docker-compose.yml</DependentUpon>
     </None>
     <None Include="docker-compose.yml" />
