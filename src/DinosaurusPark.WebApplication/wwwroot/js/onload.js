@@ -23,8 +23,8 @@ window.onload = async () => {
 }
 
 async function onGenerateClick(api) {
-    const speciesCount = document.getElementById("species-count-text").value;
-    const dinosaursCount = document.getElementById("dinosaurs-count-text").value;
+    const speciesCount = parseInt(document.getElementById("species-count-text").value);
+    const dinosaursCount = parseInt(document.getElementById("dinosaurs-count-text").value);
     await api.generate(speciesCount, dinosaursCount);
     const result = await api.getPage(1);
     document.getElementById("no-data-alert").style.display = "none";

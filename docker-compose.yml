@@ -11,7 +11,7 @@ services:
       DINOPARK_DB__CONNECTIONSTRING: Host=pg;Port=5432;Database=dinosaurus_park;Username=postgres;
       DINOPARK_SERILOG__LEVEL: Verbose
       DINOPARK_FILES__ROOT: wwwroot/img/dinosaurs
-      DINOPARK_FILES__SHORTROOT: img/dinosaurs
+      DINOPARK_FILES__SHORTROOT: /img/dinosaurs
       DINOPARK_SERILOG__USEREQUESTLOGGING: "true"
     depends_on:
       - pg
@@ -19,7 +19,7 @@ services:
       - "5005:80"
 
   pg:
-    image: postgres:9.6
+    image: postgres:10.11
     ports:
       - "5432:5432"
     volumes:
