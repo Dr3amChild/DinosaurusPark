@@ -4,7 +4,7 @@ using NUnit.Framework;
 
 namespace DinosaurusPark.UnitTests
 {
-    public class Tests
+    public class StringExtensionsTest
     {
         [SetUp]
         public void Setup()
@@ -16,19 +16,18 @@ namespace DinosaurusPark.UnitTests
         {
             static void FirstUpAction()
             {
-                ((string) null).FirstUp();
-            } 
+                ((string)null).FirstUp();
+            }
 
             Assert.Throws<ArgumentNullException>(FirstUpAction);
         }
-
 
         [Test]
         public void FrstUpExtensionMethod_ShouldThrow_If_InputStringIsEmpty()
         {
             static void FirstUpAction()
             {
-                "".FirstUp();
+                string.Empty.FirstUp();
             }
 
             Assert.Throws<ArgumentException>(FirstUpAction);
@@ -43,7 +42,7 @@ namespace DinosaurusPark.UnitTests
         public void FrstUpExtensionMethod_Should_If_InputStringIsEmpty(string input, string expected)
         {
             string result = input.FirstUp();
-           Assert.AreEqual(result, expected);
+            Assert.AreEqual(result, expected);
         }
     }
 }
