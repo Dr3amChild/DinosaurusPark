@@ -12,7 +12,7 @@ namespace DinosaurusPark.UnitTests
         }
 
         [Test]
-        public void FrstUpExtensionMethod_ShouldThrow_If_InputStringIsNull()
+        public void FrstUpExtensionMethod_ShouldThrow_IfInputStringIsNull()
         {
             static void FirstUpAction()
             {
@@ -23,7 +23,7 @@ namespace DinosaurusPark.UnitTests
         }
 
         [Test]
-        public void FrstUpExtensionMethod_ShouldThrow_If_InputStringIsEmpty()
+        public void FrstUpExtensionMethod_ShouldThrow_IfInputStringIsEmpty()
         {
             static void FirstUpAction()
             {
@@ -39,7 +39,7 @@ namespace DinosaurusPark.UnitTests
         [TestCase(" name", " name")]
         [TestCase("1 name", "1 name")]
         [TestCase("NAME", "Name")]
-        public void FrstUpExtensionMethod_Should_If_InputStringIsEmpty(string input, string expected)
+        public void FrstUpExtensionMethod_ShouldReturnExpectedValue_IfInputStringIsNotEmpty(string input, string expected)
         {
             string result = input.FirstUp();
             Assert.AreEqual(result, expected);

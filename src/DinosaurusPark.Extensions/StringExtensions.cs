@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 
+#pragma warning disable SA1122
 namespace DinosaurusPark.Extensions
 {
     public static class StringExtensions
@@ -16,3 +17,4 @@ namespace DinosaurusPark.Extensions
         }
     }
 }
+#pragma warning restore SA1122
