@@ -35,6 +35,10 @@ namespace DinosaurusPark.Generation
             if (dinosaursCount < 0)
                 throw new GenerationException($"{nameof(dinosaursCount)} must be grater than 0");
 
+            if (speciesCount == 0 && dinosaursCount > 0)
+                throw new GenerationException($"{nameof(speciesCount)} must be grater than 0 if {dinosaursCount} is positive");
+
+
             var species = Enumerable.Range(1, speciesCount).Select(i => GenerateSpecies()).ToArray();
             var rnd = new Random();
             var images = _imageProvider.GetPaths();
@@ -90,7 +94,7 @@ namespace DinosaurusPark.Generation
                         Age = f.Random.Int(1, 100),
                         Weight = f.Random.Int(1, 3000),
                         Height = f.Random.Int(1, 500),
-                        Image = images[f.Random.Int(1, images.Count - 1)],
+                        Image = images[f.Random.Int(0, images.Count - 1)],
                     });
         }
 
