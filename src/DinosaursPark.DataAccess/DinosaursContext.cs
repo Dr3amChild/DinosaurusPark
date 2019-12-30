@@ -17,6 +17,8 @@ namespace DinosaursPark.DataAccess
 
         public DbSet<Species> Species { get; set; }
 
+        public DbSet<ParkInformation> Infomration { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
@@ -32,6 +34,12 @@ namespace DinosaursPark.DataAccess
             });
 
             modelBuilder.Entity<Dinosaur>(b =>
+            {
+                b.HasKey(e => e.Id);
+                b.Property(e => e.Id).ValueGeneratedOnAdd();
+            });
+
+            modelBuilder.Entity<ParkInformation>(b =>
             {
                 b.HasKey(e => e.Id);
                 b.Property(e => e.Id).ValueGeneratedOnAdd();

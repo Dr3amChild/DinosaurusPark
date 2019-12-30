@@ -60,10 +60,12 @@ namespace DinosaursPark.WebApplication
                 .AddSingleton(_settings.Files)
                 .AddScoped<DinosaursContext>()
                 .AddScoped<IDinoRepository, DinoRepository>()
+                .AddScoped<IInformationRepository, InformationRepository>()
                 .AddSingleton(_env.ContentRootFileProvider)
                 .AddScoped<IImageProvider, ImageProvider>()
                 .AddScoped<IDataGenerator, DataGenerator>()
                 .AddScoped<IDinosaursService, DinosaursService>()
+                .AddScoped<IInformationService, InformationService>()
                 .AddMvc(opts => { opts.Filters.Add(new ValidationFilterAttribute()); })
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<PagingRequestValidator>())
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
