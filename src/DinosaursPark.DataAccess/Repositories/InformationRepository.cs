@@ -18,7 +18,7 @@ namespace DinosaursPark.DataAccess.Repositories
 
         public async Task<ParkInformation> Get()
         {
-            return await _context.Infomration.SingleOrDefaultAsync()
+            return await _context.Information.SingleOrDefaultAsync()
                    ?? throw new NotFoundException($"Information not found");
         }
 

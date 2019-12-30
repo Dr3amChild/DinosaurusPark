@@ -39,6 +39,16 @@ namespace DinosaursPark.DataAccess.Repositories
                     .ToArrayAsync();
         }
 
+        public async Task<int> DinosaursCount()
+        {
+            return await _context.Dinosaurs.CountAsync();
+        }
+
+        public async Task<int> SpeciesCount()
+        {
+            return await _context.Species.CountAsync();
+        }
+
         public async Task AddSpecies(params Species[] species)
         {
             await _context.Species.AddRangeAsync(species);
@@ -57,11 +67,6 @@ namespace DinosaursPark.DataAccess.Repositories
         public void Dispose()
         {
             _context?.Dispose();
-        }
-
-        public async Task<int> GetCount()
-        {
-            return await _context.Dinosaurs.CountAsync();
         }
     }
 }

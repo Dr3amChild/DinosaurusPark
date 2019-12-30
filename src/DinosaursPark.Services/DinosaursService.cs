@@ -28,7 +28,7 @@ namespace DinosaursPark.Services
         public async Task<PagingResult<TItem>> Get<TItem>(int pageNumber, int pageSize)
         {
             int offset = (pageNumber - 1) * pageSize;
-            int count = await _dinorepository.GetCount();
+            int count = await _dinorepository.DinosaursCount();
             var items = await _dinorepository.GetAll(pageSize, offset);
             var mappedItems = _mapper.Map<IEnumerable<TItem>>(items);
             return new PagingResult<TItem>(mappedItems, pageNumber, pageSize, count);

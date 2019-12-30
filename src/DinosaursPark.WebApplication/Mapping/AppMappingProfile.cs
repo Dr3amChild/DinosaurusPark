@@ -19,6 +19,19 @@ namespace DinosaursPark.WebApplication.Mapping
                 .ForMember(dst => dst.Gender, opt => opt.MapFrom(src => src.Gender.GetDescription()))
                 .ForMember(dst => dst.FoodType, opt => opt.MapFrom(src => src.Species.FoodType.GetDescription()))
                 .ForMember(dst => dst.Description, opt => opt.MapFrom(src => src.Species.Description));
+
+            CreateMap<ParkInformation, ParkInformationResponse>()
+                .ForMember(d => d.SpeciesCount, opt => opt.Ignore())
+                .ForMember(d => d.DinosaursCount, opt => opt.Ignore());
+
+            CreateMap<(ParkInformation parkInfo, CountInformation countInfo), ParkInformationResponse>()
+                .ConvertUsing((source, _, context) =>
+                {
+                    var result = context.Mapper.Map<ParkInformationResponse>(source.parkInfo);
+                    result.SpeciesCount = source.countInfo.SpeciesCount;
+                    result.DinosaursCount = source.countInfo.DinosaurssCount;
+                    return result;
+                });
         }
     }
 }

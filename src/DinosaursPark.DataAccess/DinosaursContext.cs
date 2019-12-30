@@ -17,7 +17,7 @@ namespace DinosaursPark.DataAccess
 
         public DbSet<Species> Species { get; set; }
 
-        public DbSet<ParkInformation> Infomration { get; set; }
+        public DbSet<ParkInformation> Information { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
