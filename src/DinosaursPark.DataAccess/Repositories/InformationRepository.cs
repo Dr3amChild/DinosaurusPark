@@ -22,6 +22,12 @@ namespace DinosaursPark.DataAccess.Repositories
                    ?? throw new NotFoundException($"Information not found");
         }
 
+        public async Task Add(ParkInformation info)
+        {
+            _context.Attach(info);
+            await _context.SaveChangesAsync();
+        }
+
         public void Dispose()
         {
             _context?.Dispose();

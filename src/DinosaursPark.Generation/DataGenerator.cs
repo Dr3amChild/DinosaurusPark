@@ -14,14 +14,17 @@ namespace DinosaursPark.Generation
 {
     public class DataGenerator : IDataGenerator
     {
+        private readonly IInformationRepository _infoRepository;
         private readonly IDinoRepository _dinoRepository;
         private readonly IImageProvider _imageProvider;
         private readonly IMapper _mapper;
+        private readonly Faker<ParkInformation> _infoFaker = new Faker<ParkInformation>();
         private readonly Faker<Species> _speciesFaker = new Faker<Species>();
         private readonly Faker<Dinosaur> _dinoFaker = new Faker<Dinosaur>("ru");
 
-        public DataGenerator(IDinoRepository dinoRepository, IImageProvider imageProvider, IMapper mapper)
+        public DataGenerator(IInformationRepository infoRepository, IDinoRepository dinoRepository, IImageProvider imageProvider, IMapper mapper)
         {
+            _infoRepository = infoRepository ?? throw new ArgumentNullException(nameof(infoRepository));
             _dinoRepository = dinoRepository ?? throw new ArgumentNullException(nameof(dinoRepository));
             _imageProvider = imageProvider ?? throw new ArgumentNullException(nameof(_imageProvider));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
@@ -38,14 +41,25 @@ namespace DinosaursPark.Generation
             if (speciesCount == 0 && dinosaursCount > 0)
                 throw new GenerationException($"{nameof(speciesCount)} must be grater than 0 if {dinosaursCount} is positive");
 
-
+            var parkInfo = GenerateparkInfo();
             var species = Enumerable.Range(1, speciesCount).Select(i => GenerateSpecies()).ToArray();
             var rnd = new Random();
             var images = _imageProvider.GetPaths();
             var dinosaurs = Enumerable.Range(1, dinosaursCount).Select(id => GenerateDinosaur(species[rnd.Next(0, speciesCount)], images)).ToArray();
 
-            await Save(species, dinosaurs);
-            return new GenerationResult(species, dinosaurs);
+            await Save(parkInfo, species, dinosaurs);
+            return new GenerationResult(parkInfo, species, dinosaurs);
+        }
+
+        private ParkInformation GenerateparkInfo()
+        {
+            return _infoFaker
+                .CustomInstantiator(f =>
+                    new ParkInformation
+                    {
+                        Name = f.Random.Words(2),
+                        Area = f.Random.Double(10, 1000)
+                    });
         }
 
         private Species GenerateSpecies()
@@ -98,8 +112,9 @@ namespace DinosaursPark.Generation
                     });
         }
 
-        private async Task Save(Species[] species, Dinosaur[] dinos)
+        private async Task Save(ParkInformation info, Species[] species, Dinosaur[] dinos)
         {
+            await _infoRepository.Add(info);
             await _dinoRepository.AddSpecies(species);
             await _dinoRepository.AddDinosaurs(dinos);
             await _dinoRepository.Commit();

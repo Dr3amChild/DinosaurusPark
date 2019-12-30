@@ -6,5 +6,7 @@ namespace DinosaursPark.Contracts.Repositories
     public interface IInformationRepository
     {
         Task<ParkInformation> Get();
+
+        Task Add(ParkInformation info);
     }
 }

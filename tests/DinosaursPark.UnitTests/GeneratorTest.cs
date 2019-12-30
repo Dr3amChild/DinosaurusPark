@@ -18,9 +18,12 @@ namespace DinosaursPark.UnitTests
         [SetUp]
         public void Setup()
         {
-            var repositoryMock = new Mock<IDinoRepository>();
-            repositoryMock.Setup(r => r.AddSpecies(It.IsAny<Species[]>()));
-            repositoryMock.Setup(r => r.AddDinosaurs(It.IsAny<Dinosaur[]>()));
+            var infoRepositoryMock = new Mock<IInformationRepository>();
+            infoRepositoryMock.Setup(r => r.Add(It.IsAny<ParkInformation>()));
+
+            var dinoRepositoryMock = new Mock<IDinoRepository>();
+            dinoRepositoryMock.Setup(r => r.AddSpecies(It.IsAny<Species[]>()));
+            dinoRepositoryMock.Setup(r => r.AddDinosaurs(It.IsAny<Dinosaur[]>()));
 
             var paths = new[] { "path" };
             var imageProvidermock = new Mock<IImageProvider>();
@@ -33,7 +36,7 @@ namespace DinosaursPark.UnitTests
                 .Setup(x => x.Map<BogusGender>(It.IsAny<Gender>()))
                 .Returns((Gender source) => It.IsAny<BogusGender>());
 
-            _generator = new DataGenerator(repositoryMock.Object, imageProvidermock.Object, mapperMock.Object);
+            _generator = new DataGenerator(infoRepositoryMock.Object, dinoRepositoryMock.Object, imageProvidermock.Object, mapperMock.Object);
         }
 
         [Test]
