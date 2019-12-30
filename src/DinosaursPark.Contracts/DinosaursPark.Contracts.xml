@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DinosaursPark.Contracts</name>
+    </assembly>
+    <members>
+        <member name="F:DinosaursPark.Contracts.Models.FoodType.Herbivorous">
+            <summary>
+            Травоядный
+            </summary>
+        </member>
+        <member name="F:DinosaursPark.Contracts.Models.FoodType.Predator">
+            <summary>
+            Хищник
+            </summary>
+        </member>
+        <member name="F:DinosaursPark.Contracts.Models.FoodType.Omnivore">
+            <summary>
+            Всеядный
+            </summary>
+        </member>
+        <member name="F:DinosaursPark.Contracts.Models.Gender.Male">
+            <summary>
+            Самец
+            </summary>
+        </member>
+        <member name="F:DinosaursPark.Contracts.Models.Gender.Female">
+            <summary>
+            Самка
+            </summary>
+        </member>
+        <member name="T:DinosaursPark.Contracts.Services.IDataGenerator">
+            <summary>
+            Генератор, заполняющий БД данными.
+            </summary>
+        </member>
+    </members>
+</doc>
