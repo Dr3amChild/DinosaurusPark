@@ -58,7 +58,8 @@ namespace DinosaursPark.Generation
                     new ParkInformation
                     {
                         Name = f.Random.Words(2),
-                        Area = f.Random.Double(10, 1000)
+                        Area = f.Random.Double(10, 1000),
+                        Address = f.Address.FullAddress()
                     });
         }
 
