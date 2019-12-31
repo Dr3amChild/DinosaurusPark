@@ -16,7 +16,7 @@ namespace DinosaursPark.WebApplication.Controllers
             _dinoService = dinoService ?? throw new ArgumentNullException(nameof(dinoService));
         }
 
-        public IActionResult Index()
+        public ViewResult Index()
         {
             return View();
         }

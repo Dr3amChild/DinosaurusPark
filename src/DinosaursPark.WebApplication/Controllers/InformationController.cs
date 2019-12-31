@@ -17,7 +17,13 @@ namespace DinosaursPark.WebApplication.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public ViewResult Index()
+        {
+            return View();
+        }
+
+        [HttpGet("load")]
+        public async Task<IActionResult> LoadInfo()
         {
             var result = await _informationService.Get<ParkInformationResponse>();
             return Ok(result);
