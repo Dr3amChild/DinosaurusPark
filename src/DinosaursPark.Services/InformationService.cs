@@ -24,7 +24,7 @@ namespace DinosaursPark.Services
         {
             var items = await _repository.Get();
             int dinosaursCount = await _dinosaursRepository.DinosaursCount();
-            int speciesCount = await _dinosaursRepository.DinosaursCount();
+            int speciesCount = await _dinosaursRepository.SpeciesCount();
             var countInformation = new CountInformation(speciesCount, dinosaursCount);
             return _mapper.Map<TItem>((items, countInformation));
         }

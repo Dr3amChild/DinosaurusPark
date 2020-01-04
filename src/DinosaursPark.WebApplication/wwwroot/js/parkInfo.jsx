@@ -2,7 +2,7 @@
     render() {
         return (
             <div className="container">
-                <InfoField keyName="name" title="Название:" info={this.props.info} />
+                <InfoField keyName="name" title="Название парка:" info={this.props.info} />
                 <InfoField keyName="address" title="Расположение:" info={this.props.info} />
                 <InfoField keyName="dinosaursCount" title="Динозавров в парке:" info={this.props.info} />
                 <InfoField keyName="speciesCount" title="Видов:" info={this.props.info} />
