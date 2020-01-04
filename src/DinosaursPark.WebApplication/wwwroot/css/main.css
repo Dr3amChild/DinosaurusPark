@@ -66,3 +66,13 @@
 .validation-error {
     box-shadow: 0 0 0 0.1rem rgba(255, 23, 0, 0.35);
 }
+
+.park-info-header {
+    font-weight: 500 !important;
+    font-size: 1.2rem;
+}
+
+.park-info-value {
+    font-weight: 400 !important;
+    font-size: 1rem;
+}

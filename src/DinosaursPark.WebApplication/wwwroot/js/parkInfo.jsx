@@ -13,11 +13,10 @@
 
 class InfoField extends React.Component {
     render() {
-        console.log(this.props);
         return (
             <div className="col-sm">
-                <div className="info-header">{this.props.title}</div>
-                <p>{this.props.info[this.props.keyName]}</p>
+                <div className="park-info-header">{this.props.title}</div>
+                <p className="park-info-value">{this.props.info[this.props.keyName]}</p>
             </div>
         );
     }
