@@ -20,13 +20,19 @@ namespace DinosaursPark.Services
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public async Task<TItem> Get<TItem>()
+        public async Task<TItem> GetParkInfo<TItem>()
         {
-            var items = await _repository.Get();
+            var items = await _repository.GetParkInfo();
             int dinosaursCount = await _dinosaursRepository.DinosaursCount();
             int speciesCount = await _dinosaursRepository.SpeciesCount();
             var countInformation = new CountInformation(speciesCount, dinosaursCount);
             return _mapper.Map<TItem>((items, countInformation));
+        }
+
+        public async Task<TItem> GetSpeciesInfo<TItem>()
+        {
+            var items = await _repository.GetSpeciesInfo();
+            return _mapper.Map<TItem>(items);
         }
     }
 }

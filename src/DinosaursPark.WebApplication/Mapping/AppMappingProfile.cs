@@ -20,11 +20,11 @@ namespace DinosaursPark.WebApplication.Mapping
                 .ForMember(dst => dst.FoodType, opt => opt.MapFrom(src => src.Species.FoodType.GetDescription()))
                 .ForMember(dst => dst.Description, opt => opt.MapFrom(src => src.Species.Description));
 
-            CreateMap<ParkInformation, ParkInformationResponse>()
+            CreateMap<SpeciesInformation, ParkInformationResponse>()
                 .ForMember(d => d.SpeciesCount, opt => opt.Ignore())
                 .ForMember(d => d.DinosaursCount, opt => opt.Ignore());
 
-            CreateMap<(ParkInformation parkInfo, CountInformation countInfo), ParkInformationResponse>()
+            CreateMap<(SpeciesInformation parkInfo, CountInformation countInfo), ParkInformationResponse>()
                 .ConvertUsing((source, _, context) =>
                 {
                     var result = context.Mapper.Map<ParkInformationResponse>(source.parkInfo);

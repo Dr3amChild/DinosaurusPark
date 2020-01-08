@@ -59,7 +59,7 @@ namespace DinosaursPark.Generation
                     {
                         Name = f.Random.Words(2),
                         Area = f.Random.Double(10, 1000),
-                        Address = f.Address.FullAddress()
+                        Address = $"{f.Address.Country()}, {f.Address.City()}, {f.Address.StreetName()}, {f.Address.BuildingNumber()}"
                     });
         }
 

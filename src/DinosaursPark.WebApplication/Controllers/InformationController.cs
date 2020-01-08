@@ -25,7 +25,7 @@ namespace DinosaursPark.WebApplication.Controllers
         [HttpGet("load")]
         public async Task<IActionResult> LoadInfo()
         {
-            var result = await _informationService.Get<ParkInformationResponse>();
+            var result = await _informationService.GetParkInfo<ParkInformationResponse>();
             return Ok(result);
         }
     }

@@ -4,6 +4,8 @@ namespace DinosaursPark.Contracts.Services
 {
     public interface IInformationService
     {
-        Task<TItem> Get<TItem>();
+        Task<TItem> GetParkInfo<TItem>();
+
+        Task<TItem> GetSpeciesInfo<TItem>();
     }
 }
