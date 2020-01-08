@@ -4,7 +4,7 @@ const ReactDOM = window.ReactDOM;
 window.onload = async () => {
     const api = new ParkInfoApi();    
     try {
-        const parkInfo = await api.load();
+        const parkInfo = await api.getParkInfo();
         const area = document.getElementById("info-area");
         ReactDOM.unmountComponentAtNode(area);
         ReactDOM.render(React.createElement(ParkInfo, { info: parkInfo }), area);

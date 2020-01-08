@@ -2,6 +2,7 @@
 using DinosaursPark.WebApplication.Responses;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace DinosaursPark.WebApplication.Controllers
@@ -22,10 +23,18 @@ namespace DinosaursPark.WebApplication.Controllers
             return View();
         }
 
-        [HttpGet("load")]
+        [HttpGet("park")]
         public async Task<IActionResult> LoadInfo()
         {
             var result = await _informationService.GetParkInfo<ParkInformationResponse>();
+            return Ok(result);
+        }
+
+        [HttpGet("species")]
+        public async Task<IActionResult> SpeciesInfo()
+        {
+            var items = await _informationService.GetSpeciesInfo<IReadOnlyCollection<SpeciesInformationResponse>>();
+            var result = new CollectionResponse<SpeciesInformationResponse>(items);
             return Ok(result);
         }
     }
