@@ -2,25 +2,22 @@
 using DinosaursPark.Contracts.Models;
 using DinosaursPark.Contracts.Repositories;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace DinosaursPark.DataAccess.Repositories
 {
-    public class DinoRepository : IDinoRepository, IDisposable
+    public class DinoRepository : BaseRepository, IDinoRepository
     {
-        private readonly DinosaursContext _context;
-
         public DinoRepository(DinosaursContext context)
+         : base(context)
         {
-            _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
         public async Task<Dinosaur> GetById(int id)
         {
-            return await _context
+            return await Context
                            .Dinosaurs
                            .Include(d => d.Species)
                            .SingleOrDefaultAsync(d => d.Id == id)
@@ -29,7 +26,7 @@ namespace DinosaursPark.DataAccess.Repositories
 
         public async Task<IReadOnlyCollection<Dinosaur>> GetAll(int count, int offset)
         {
-            return await _context
+            return await Context
                     .Dinosaurs
                     .Include(d => d.Species)
                     .OrderBy(d => d.Id)
@@ -41,32 +38,27 @@ namespace DinosaursPark.DataAccess.Repositories
 
         public async Task<int> DinosaursCount()
         {
-            return await _context.Dinosaurs.CountAsync();
+            return await Context.Dinosaurs.CountAsync();
         }
 
         public async Task<int> SpeciesCount()
         {
-            return await _context.Species.CountAsync();
+            return await Context.Species.CountAsync();
         }
 
         public async Task AddSpecies(params Species[] species)
         {
-            await _context.Species.AddRangeAsync(species);
+            await Context.Species.AddRangeAsync(species);
         }
 
         public async Task AddDinosaurs(params Dinosaur[] dinosaurs)
         {
-            await _context.Dinosaurs.AddRangeAsync(dinosaurs);
+            await Context.Dinosaurs.AddRangeAsync(dinosaurs);
         }
 
         public async Task Commit()
         {
-            await _context.SaveChangesAsync();
-        }
-
-        public void Dispose()
-        {
-            _context?.Dispose();
+            await Context.SaveChangesAsync();
         }
     }
 }
