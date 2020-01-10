@@ -9,20 +9,6 @@ window.onload = async () => {
         ReactDOM.unmountComponentAtNode(area);
         ReactDOM.render(React.createElement(ParkInfo, { info: parkInfo }), area);
     } catch (e) {
-        console.error(e);
+        new Generation(10, 100, 10).showForm(); //todo replace literals
     }
-    //if (!result || !result.items.length) {
-    //    const area = document.getElementById("no-data-alert");
-    //    area.style.display = "block";
-    //    ReactDOM.unmountComponentAtNode(area);
-    //    ReactDOM.render(
-    //        React.createElement(GenerationForm,
-    //        {
-    //            onClick: async () => await onGenerateClick(api),
-    //            species: 10,
-    //            dinosaurs: 100
-    //        }),
-    //        area);
-    //} else {        
-    //}
-}
+};

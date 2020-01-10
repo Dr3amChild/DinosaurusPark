@@ -1,15 +1,22 @@
 ﻿class ParkInfoApi {   
     async getParkInfo() {
-        const response = await window.fetch(`/information/park`, {
-            method: "GET"
-        });
-        return await response.json();
+        return this.getOrThrow(`/information/park`);
     }
 
     async getSpeciesInfo() {
-        const response = await window.fetch(`/information/species`, {
+        return this.getOrThrow(`/information/species`);
+    }
+    
+    async getOrThrow(url) {
+        const response = await window.fetch(url, {
             method: "GET"
         });
-        return await response.json();
+
+        const responseText = await response.json();
+        if(!response.ok) {
+            throw new Error(responseText);
+        }
+
+        return responseText;
     }
 }
