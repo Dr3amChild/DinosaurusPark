@@ -16,6 +16,11 @@ namespace DinosaursPark.WebApplication.Controllers
             _generator = generator ?? throw new ArgumentNullException(nameof(generator));
         }
 
+        public ViewResult Index()
+        {
+            return View();
+        }
+
         [HttpPost("create")]
         [ProducesResponseType(200)]
         public async Task<IActionResult> Create(GenerationRequest request)

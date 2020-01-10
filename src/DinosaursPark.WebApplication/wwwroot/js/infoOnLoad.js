@@ -9,6 +9,6 @@ window.onload = async () => {
         ReactDOM.unmountComponentAtNode(area);
         ReactDOM.render(React.createElement(ParkInfo, { info: parkInfo }), area);
     } catch (e) {
-        new Generation(10, 100, 10).showForm(); //todo replace literals
+        window.location.href = "/generation";
     }
 };

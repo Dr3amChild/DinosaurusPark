@@ -25,13 +25,12 @@
         await this.api.generate(speciesCount, dinosaursCount);
         const result = await this.api.getPage(1);
         document.getElementById("no-data-alert").style.display = "none";
-        window.show(result);
+        this.show(result);
         this.setPaging(result, (e) => this.onPageClick(e, this.api));
     }
 
     show(paging) {
-        const area = document.getElementById("Dinosaurs-area");
-        ReactDOM.unmountComponentAtNode(area);
+        const area = document.getElementById("dinosaurs-area");
         ReactDOM.render(React.createElement(Cards, { items: paging.items }), area);
     }
 
