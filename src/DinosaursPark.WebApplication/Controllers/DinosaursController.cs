@@ -21,11 +21,6 @@ namespace DinosaursPark.WebApplication.Controllers
             return View();
         }
 
-        public IActionResult Info()
-        {
-            return View();
-        }
-
         [HttpGet("/get")]
         public async Task<IActionResult> Get(GetByIdRequest request)
         {

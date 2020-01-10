@@ -1,10 +1,11 @@
-﻿using DinosaursPark.WebApplication.Validation;
+﻿using System;
+using System.Net;
+using System.Threading.Tasks;
+using DinosaursPark.Contracts.Exceptions;
+using DinosaursPark.WebApplication.Validation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using System;
-using System.Net;
-using System.Threading.Tasks;
 
 namespace DinosaursPark.WebApplication.Middlewares
 {
@@ -25,19 +26,23 @@ namespace DinosaursPark.WebApplication.Middlewares
             {
                 await _next(context);
             }
+            catch (NotFoundException ex)
+            {
+                await HandleExceptionAsync(context, ex, HttpStatusCode.NotFound, ex.Message);
+                _logger.LogInformation(ex.Message);
+            }
             catch (Exception ex)
             {
-                await HandleExceptionAsync(context, ex);
+                await HandleExceptionAsync(context, ex, HttpStatusCode.InternalServerError, ErrorCodes.InternalServerError);
+                _logger.LogError(ex, "Unhandled error occured");
             }
         }
 
-        private Task HandleExceptionAsync(HttpContext context, Exception ex)
+        private static Task HandleExceptionAsync(HttpContext context, Exception ex, HttpStatusCode code, string errorMessage)
         {
-            var code = HttpStatusCode.InternalServerError;
-            var result = JsonConvert.SerializeObject(new { error = ErrorCodes.InternalServerError });
+            var result = JsonConvert.SerializeObject(new { error = errorMessage });
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)code;
-            _logger.LogError(ex, "Unhandled error occured");
             return context.Response.WriteAsync(result);
         }
     }
