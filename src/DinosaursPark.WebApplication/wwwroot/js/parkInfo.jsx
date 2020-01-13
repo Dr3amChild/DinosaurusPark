@@ -6,6 +6,7 @@
                 <InfoField keyName="address" title="Расположение:" info={this.props.info} />
                 <InfoField keyName="dinosaursCount" title="Динозавров в парке:" info={this.props.info} />
                 <InfoField keyName="speciesCount" title="Видов:" info={this.props.info} />
+                <button className="btn btn-info" onClick={this.props.onSpeciesInfoClick}>Загрузить</button>
             </div>
         );
     }
