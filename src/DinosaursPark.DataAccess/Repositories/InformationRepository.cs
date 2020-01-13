@@ -27,7 +27,7 @@ namespace DinosaursPark.DataAccess.Repositories
                      join species in Context.Species on dinosaur.SpeciesId equals species.Id
                      group dinosaur by species.Name into gr
                      select new SpeciesInformation { SpeciesName = gr.Key, Count = gr.Count() };
-            return await query.ToArrayAsync();
+            return await query.OrderByDescending(s => s.Count).ToArrayAsync();
         }
 
         public async Task Add(ParkInformation info)
