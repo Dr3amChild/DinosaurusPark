@@ -91,5 +91,35 @@ namespace DinosaursPark.UnitTests
             var res = await _generator.Generate(speciesCount, dinosaursCount);
             Assert.AreEqual(dinosaursCount, res.Dinosaurs.Count);
         }
+
+        [Test]
+        public async Task GeneratedParkInfo_IsNotNull()
+        {
+            var res = await _generator.Generate(1, 10);
+            Assert.NotNull(res.Info);
+        }
+
+        [Test]
+        public async Task GeneratedParkInfoName_IsNotEmpty()
+        {
+            var res = await _generator.Generate(1, 10);
+            Assert.IsNotNull(res.Info.Name);
+            Assert.IsNotEmpty(res.Info.Name);
+        }
+
+        [Test]
+        public async Task GeneratedParkInfoAddress_IsNotEmpty()
+        {
+            var res = await _generator.Generate(1, 10);
+            Assert.IsNotNull(res.Info.Address);
+            Assert.IsNotEmpty(res.Info.Address);
+        }
+
+        [Test]
+        public async Task GeneratedParkInfoArea_IsPositive()
+        {
+            var res = await _generator.Generate(1, 10);
+            Assert.Positive(res.Info.Area);
+        }
     }
 }
