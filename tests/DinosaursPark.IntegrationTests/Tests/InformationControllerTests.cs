@@ -1,9 +1,6 @@
 ﻿using DinosaursPark.IntegrationTests.Apis;
 using DinosaursPark.IntegrationTests.Requests;
-using DinosaursPark.IntegrationTests.Responses;
-using DinosaursPark.WebApplication.Validation;
 using NUnit.Framework;
-using System;
 using System.Net;
 using System.Threading.Tasks;
 
