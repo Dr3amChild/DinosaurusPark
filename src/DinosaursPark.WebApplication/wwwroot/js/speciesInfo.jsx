@@ -1,16 +1,25 @@
 ﻿class SpeciesInfo extends React.Component {
     render() {
         return (
-            <div id="species-list">
-                {this.speciesList()}
-            </div>
+            <table className="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Вид</th>
+                        <th>Количество особей</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {this.speciesList()}
+                </tbody>
+            </table>
         );
     }
 
     speciesList() {
         const items = [];
         for (let idx = 0; idx < this.props.info.length; ++idx) {
-            items.push(<SpeciesInfoField key={idx} species={this.props.info[idx].speciesName} count={this.props.info[idx].count} />);
+            items.push(<SpeciesInfoField key={idx} idx={idx + 1} species={this.props.info[idx].speciesName} count={this.props.info[idx].count} />);
         }
         return items;
     }
@@ -19,10 +28,11 @@
 class SpeciesInfoField extends React.Component {
     render() {
         return (
-            <div className="col-sm">
-                <div className="species-info-header">{this.props.species}</div>
-                <div className="species-info-header">{this.props.count}</div>
-            </div>
+            <tr>
+                <th>{this.props.idx}</th>
+                <td>{this.props.species}</td>
+                <td>{this.props.count}</td>
+            </tr>
         );
     }
 }
