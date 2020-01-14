@@ -20,6 +20,7 @@ namespace DinosaursPark.IntegrationTests.Tests
         {
             _dinosaursApi = GetApi<IDinosaursControllerApi>();
             _generatorApi = GetApi<IGenerationControllerApi>();
+            ClearDatabase();
         }
 
         [Test]
@@ -45,7 +46,6 @@ namespace DinosaursPark.IntegrationTests.Tests
         }
 
         [Test]
-        [Ignore("Need [TearDown] logic")]
         public async Task GetAll_ReturnsLessThanExpectedCount_IfThereWasGeneratedLessThanRequired()
         {
             const int actualCount = 4;
@@ -57,7 +57,7 @@ namespace DinosaursPark.IntegrationTests.Tests
 
             const int expectedCount = 5;
             await _generatorApi.Generate<GenerationResponse>(generationRequest);
-            var result = await _dinosaursApi.GetAll<DinosaursResponse>(expectedCount, 0);
+            var result = await _dinosaursApi.GetAll<DinosaursResponse>(1, expectedCount);
             Assert.AreEqual(result.Content.Items.Count, actualCount);
         }
 

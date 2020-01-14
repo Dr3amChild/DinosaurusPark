@@ -17,6 +17,7 @@ namespace DinosaursPark.IntegrationTests.Tests
         public void Setup()
         {
             _api = GetApi<IGenerationControllerApi>();
+            ClearDatabase();
         }
 
         [Test]

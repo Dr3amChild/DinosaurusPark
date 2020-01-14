@@ -3,4 +3,4 @@ WORKDIR /src
 COPY . .
 WORKDIR /src/tests/DinosaursPark.IntegrationTests
 ENTRYPOINT ["dotnet"]
-CMD ["test", "-v", "n"]
+CMD ["test", "-v", "m"]

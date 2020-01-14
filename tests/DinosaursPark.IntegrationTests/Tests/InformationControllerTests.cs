@@ -16,40 +16,37 @@ namespace DinosaursPark.IntegrationTests.Tests
         {
             _informationApi = GetApi<IInformationControllerApi>();
             _generationApi = GetApi<IGenerationControllerApi>();
+            ClearDatabase();
         }
 
         [Test]
-        [Ignore("Need [TearDown] logic")]
         public async Task GetParkInfo_ReturnsNotFound_IfDataNotGenerated()
         {
             var result = await _informationApi.GetParkInfo<string>();
-            Assert.AreEqual(result.StatusCode, HttpStatusCode.NotFound);
+            Assert.AreEqual(result.StatusCode, HttpStatusCode.NotFound, result.Error?.Content ?? result.Content);
         }
 
         [Test]
-        [Ignore("Need [TearDown] logic")]
-        public async Task GetParkInfo_ReturnsOk_IfDataNotGenerated()
-        {
-            var result = await _informationApi.GetParkInfo<string>();
-            Assert.AreEqual(result.StatusCode, HttpStatusCode.OK);
-        }
-
-        [Test]
-        [Ignore("Need [TearDown] logic")]
-        public async Task GetSpeciesInfo_ReturnsNotFound_IfDataGenerated()
+        public async Task GetParkInfo_ReturnsOk_IfDataGenerated()
         {
             await _generationApi.Generate<string>(new GenerationRequest { SpeciesCount = 1, DinosaursCount = 10 });
-            var result = await _informationApi.GetSpeciesInfo<string>();
-            Assert.AreEqual(result.StatusCode, HttpStatusCode.NotFound);
+            var result = await _informationApi.GetParkInfo<string>();
+            Assert.AreEqual(HttpStatusCode.OK, result.StatusCode, result.Error?.Content ?? result.Content);
         }
 
         [Test]
-        [Ignore("Need [TearDown] logic")]
+        public async Task GetSpeciesInfo_ReturnsOk_IfDataNotGenerated()
+        {
+            var result = await _informationApi.GetSpeciesInfo<string>();
+            Assert.AreEqual(HttpStatusCode.OK, result.StatusCode, result.Error?.Content ?? result.Content);
+        }
+
+        [Test]
         public async Task GetSpeciesInfo_ReturnsOk_IfDataGenerated()
         {
             await _generationApi.Generate<string>(new GenerationRequest { SpeciesCount = 1, DinosaursCount = 10 });
             var result = await _informationApi.GetSpeciesInfo<string>();
-            Assert.AreEqual(result.StatusCode, HttpStatusCode.OK);
+            Assert.AreEqual(HttpStatusCode.OK, result.StatusCode, result.Error?.Content ?? result.Content);
         }
     }
 }
