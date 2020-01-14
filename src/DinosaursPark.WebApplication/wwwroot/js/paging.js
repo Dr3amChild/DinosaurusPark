@@ -12,7 +12,7 @@
         const pagingArea = document.getElementById("paging-nav");
         ReactDOM.unmountComponentAtNode(pagingArea);
         ReactDOM.render(React.createElement(
-            Paging,
+            Pages,
             {
                 pagesCount: paging.pagesCount,
                 activePage: paging.pageNumber,

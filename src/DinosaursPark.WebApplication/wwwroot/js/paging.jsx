@@ -1,4 +1,4 @@
-﻿class Paging extends React.Component {
+﻿class Pages extends React.Component {
     render() {
         return (
             <ul id="paging-list" className="pagination pagination-lg">
