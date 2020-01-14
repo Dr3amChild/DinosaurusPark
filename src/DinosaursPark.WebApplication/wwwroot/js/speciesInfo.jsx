@@ -2,6 +2,7 @@
     render() {
         return (
             <table className="table table-bordered">
+                <caption>Информация о видах</caption>
                 <thead>
                     <tr>
                         <th>#</th>
