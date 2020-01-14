@@ -5,13 +5,13 @@
                 <table className="table table-bordered">
                     <caption>Информация о парке</caption>
                     <tbody>
-                        <InfoTr keyName="name" title="Название парка" info={this.props.info} />
+                        <InfoTr keyName="name" title="Название" info={this.props.info} />
                         <InfoTr keyName="address" title="Расположение" info={this.props.info} />
                         <InfoTr keyName="dinosaursCount" title="Динозавров" info={this.props.info} />
                         <InfoTr keyName="speciesCount" title="Видов" info={this.props.info} />
                     </tbody>
                 </table>
-                <button className="btn btn-info" onClick={this.props.onSpeciesInfoClick}>Загрузить</button>
+                <button className="btn btn-info" onClick={this.props.onSpeciesInfoClick}>Загрузить данные о видах</button>
             </div>
         );
     }
