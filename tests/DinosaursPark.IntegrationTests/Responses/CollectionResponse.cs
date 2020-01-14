@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace DinosaursPark.WebApplication.Responses
+namespace DinosaursPark.IntegrationTests.Responses
 {
     public class CollectionResponse<T>
     {

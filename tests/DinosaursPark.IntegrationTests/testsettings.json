@@ -1,5 +1,9 @@
 {
   "api": {
     "uri": "http://localhost:5005"
+  },
+
+  "db": {
+    "connectionString": "Host=localhost;Port=5432;Database=dinosaurus_park;Username=postgres;"
   }
 }
