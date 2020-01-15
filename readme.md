@@ -20,17 +20,17 @@
  - StyleCop
  
 ## Запуск приложения из консоли
-  1. cd <solution folder>
+  1. cd %solution folder%
   2. docker-compose up --build
   3. дождаться запуска контейнера
   4. открыть браузер по адресу localhost:5005
   
 ## Запуск юнит-тестов
- 1. cd <solution folder>/tests/DinosaursPark.UnitTests
+ 1. cd %solution folder%/tests/DinosaursPark.UnitTests
  2. dotnet test
   
 ## Запуск интеграционных тестов
-  1. cd <solution folder>/tests/DinosaursPark.IntegrationTests
+  1. cd %solution folder%/tests/DinosaursPark.IntegrationTests
   2. docker-compose up --build
   3. дождаться запуска контейнеров и выполнения тестов  
  
