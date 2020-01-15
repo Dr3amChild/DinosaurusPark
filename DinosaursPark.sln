@@ -24,6 +24,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A50FA5B1-657D-4029-AA2B-00374191AF0C}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		readme.md = readme.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DinosaursPark.UnitTests", "tests\DinosaursPark.UnitTests\DinosaursPark.UnitTests.csproj", "{549870D3-9525-401D-BD6A-E30624D2A5B3}"
