@@ -26,7 +26,7 @@
     <PackageReference Include="JavaScriptEngineSwitcher.ChakraCore.Native.win-x64" Version="3.3.0" />
     <PackageReference Include="JavaScriptEngineSwitcher.ChakraCore.Native.win-x86" Version="3.3.0" />
     <PackageReference Include="JavaScriptEngineSwitcher.Extensions.MsDependencyInjection" Version="3.3.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.1" />
     <PackageReference Include="Polly" Version="7.2.0" />
     <PackageReference Include="React.AspNet" Version="5.1.2" />
     <PackageReference Include="Serilog.AspNetCore" Version="3.2.0" />
