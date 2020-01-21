@@ -16,11 +16,11 @@
             {
                 pagesCount: paging.pagesCount,
                 activePage: paging.pageNumber,
-                onClick: (e) => this.onPageClick(e, this.api)
+                onClick: (e) => this.onPageClick(e, this.api, paging)
             }), pagingArea);
     }
 
-    async onPageClick(e, api) {
+    async onPageClick(e, api, paging) {
         const pageNum = e.currentTarget.getAttribute("page-num");
         const result = await api.getPage(pageNum);
         const pages = document.getElementsByClassName("page-item");
@@ -28,5 +28,7 @@
             page.className = page.getAttribute("page-num") === pageNum ? "page-item active" : "page-item";
         }
         this.show(result);
+        paging.pageNumber = parseInt(pageNum);
+        this.setPaging(paging);
     }
 }
