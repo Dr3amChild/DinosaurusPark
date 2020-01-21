@@ -11,5 +11,7 @@
         public int DinosaursCount { get; set; }
 
         public int SpeciesCount { get; set; }
+
+        public double Density => DinosaursCount / Area;
     }
 }
