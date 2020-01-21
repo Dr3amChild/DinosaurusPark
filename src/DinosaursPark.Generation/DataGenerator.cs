@@ -42,12 +42,14 @@ namespace DinosaursPark.Generation
                 throw new GenerationException($"{nameof(speciesCount)} must be grater than 0 if {dinosaursCount} is positive");
 
             var parkInfo = GenerateparkInfo();
-            var species = Enumerable.Range(1, speciesCount).Select(i => GenerateSpecies()).ToArray();
+
+            var species = Enumerable.Range(1, speciesCount).Select(id => GenerateSpecies()).ToArray();
+            species = SolveSpeciesCollisiions(species);
             var rnd = new Random();
             var images = _imageProvider.GetPaths();
             var dinosaurs = Enumerable.Range(1, dinosaursCount).Select(id => GenerateDinosaur(species[rnd.Next(0, speciesCount)], images)).ToArray();
 
-            await Save(parkInfo, species, dinosaurs);
+            await Save(parkInfo, species.ToArray(), dinosaurs);
             return new GenerationResult(parkInfo, species, dinosaurs);
         }
 
@@ -70,29 +72,48 @@ namespace DinosaursPark.Generation
                     new Species
                     {
                         FoodType = f.Random.Enum<FoodType>(),
-                        Name = Latinize(f),
+                        Name = GenerateSpeciesName(f),
                         Description = f.Lorem.Paragraph(),
                     });
         }
 
-        private string Latinize(Faker faker)
+        private string GenerateSpeciesName(Faker faker)
         {
-            static string ModifyName(string input, string postfix)
-            {
-                if (!input.EndsWith(postfix))
-                    input += postfix;
-                return input;
-            }
-
             var words = faker.Lorem.Words(2);
-            const string namePostfix = "us";
-            if (!words[0].EndsWith(namePostfix))
-                words[0] = words[0] + namePostfix;
+            (string Firstname, string Lastname) result =  (words[0].FirstUp(), words[1].FirstUp());
+            result.Firstname = ModifyName(result.Firstname, "us");
+            result.Lastname = ModifyName(result.Lastname, "is");            
+            return FullnameToString(result);
+        }
 
-            words[0] = ModifyName(words[0], "us");
-            words[1] = ModifyName(words[1], "is");
+        private Species[] SolveSpeciesCollisiions(IReadOnlyCollection<Species> species)
+        {
+            var group = species.GroupBy(s => s.Name);
+            return group.SelectMany(gr => 
+            {
+                if (gr.Count() == 1)
+                    return gr;
 
-            return string.Join(" ", words.Select(w => w.FirstUp()));
+                return gr.Select((s, i) => 
+                {
+                    if (i > 0)
+                        s.Name += $" {i + 1}";
+                    return s;
+                });
+            })
+            .ToArray();
+        }
+
+        private static string ModifyName(string input, string postfix)
+        {
+            if (!input.EndsWith(postfix))
+                input += postfix;
+            return input;
+        }
+
+        private string FullnameToString((string Firstname, string Lastname) fullname)
+        {
+            return $"{fullname.Firstname} {fullname.Lastname}";
         }
 
         private Dinosaur GenerateDinosaur(Species species, IReadOnlyList<string> images)

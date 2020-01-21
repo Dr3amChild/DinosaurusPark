@@ -13,7 +13,7 @@
                         key="2"
                         id="species-count-text"
                         min="1"
-                        max="100"
+                        max="1000"
                         title="Количество видов:"
                         text={this.props.species}
                         errorClass={this.errorClassName}
@@ -23,7 +23,7 @@
                         key="3"
                         id="dinosaurs-count-text"
                         min="1"
-                        max="1000"
+                        max="1000000"
                         title="Количество динозавров:"
                         text={this.props.dinosaurs}
                         errorClass={this.errorClassName}
