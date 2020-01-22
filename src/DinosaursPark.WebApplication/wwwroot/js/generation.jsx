@@ -28,7 +28,10 @@
                         text={this.props.dinosaurs}
                         errorClass={this.errorClassName}
                         placeholder="Введите значение" />);
-        items.push(<button type="button" key="4" className="btn btn-info" onClick={this.onGenerateClick}>Сгенерировать</button>);
+        items.push(<button type="button" key="4" className="btn btn-info" onClick={this.onGenerateClick}>
+                        <span id="wait-block" className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Сгенерировать
+                   </button>);        
         return items;
     }
 

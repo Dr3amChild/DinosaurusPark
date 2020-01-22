@@ -84,3 +84,8 @@ caption {
     border-bottom: 0;
     font-weight: 500;
 }
+
+#wait-block {
+    display: none;
+    margin-right: 0.5rem;
+}

@@ -19,7 +19,8 @@
             area);
     }
 
-    async onGenerateClick() {
+    async onGenerateClick() {        
+        document.getElementById("wait-block").style.display = "inline-block";
         const speciesCount = parseInt(document.getElementById("species-count-text").value);
         const dinosaursCount = parseInt(document.getElementById("dinosaurs-count-text").value);
         await this.api.generate(speciesCount, dinosaursCount);
