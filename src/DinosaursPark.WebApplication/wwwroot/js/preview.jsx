@@ -14,7 +14,7 @@ class Card extends React.Component {
             <div className="dinosaur-card alert alert-info">
                 <Preview image={this.props.info.image} />
                 <PreviewRow title="Динозавр" value={this.props.info.name} />
-                <PreviewRow title="Вид" value={this.props.info.species} />
+                <PreviewRow title="Вид" value={this.props.info.species} valueClass={"species-name"} />
                 <Button title="Подробнее" info={this.props.info} />
             </div>
         );
@@ -33,7 +33,7 @@ class PreviewRow extends React.Component {
     render() {
         return [
             <div key="1" className="row-header">{this.props.title}</div>,
-            <div key="2" className="row-value">{this.props.value}</div>          
+            <div key="2" className={"row-value " + this.props.valueClass}>{this.props.value}</div>          
         ];
     }
 }

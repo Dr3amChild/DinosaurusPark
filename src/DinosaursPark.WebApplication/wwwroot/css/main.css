@@ -41,6 +41,10 @@
     font-size: 14px;
 }
 
+.species-name {
+    min-height: 2.6rem;
+}
+
 .dinusaur-info-btn {
     grid-column-start: 1;
     grid-column-end: 3;
@@ -88,4 +92,8 @@ caption {
 #wait-block {
     display: none;
     margin-right: 0.5rem;
+}
+
+.page-item {
+    cursor: pointer;
 }
