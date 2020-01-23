@@ -37,5 +37,12 @@ namespace DinosaursPark.WebApplication.Controllers
             var result = new CollectionResponse<SpeciesInformationResponse>(items);
             return Ok(result);
         }
+
+        [HttpDelete]
+        public async Task<IActionResult> ClearInformation()
+        {
+            await _informationService.DeleteAll();
+            return NoContent();
+        }
     }
 }

@@ -9,12 +9,14 @@ namespace DinosaursPark.Services
 {
     public class InformationService : IInformationService
     {
+        private readonly IDinosaursService _dinosaursService;
         private readonly IInformationRepository _repository;
         private readonly IDinoRepository _dinosaursRepository;
         private readonly IMapper _mapper;
 
-        public InformationService(IInformationRepository repository, IDinoRepository dinosaursRepository, IMapper mapper)
+        public InformationService(IDinosaursService dinosaursService, IInformationRepository repository, IDinoRepository dinosaursRepository, IMapper mapper)
         {
+            _dinosaursService = dinosaursService ?? throw new ArgumentNullException(nameof(dinosaursService));
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
             _dinosaursRepository = dinosaursRepository ?? throw new ArgumentNullException(nameof(dinosaursRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
@@ -37,6 +39,8 @@ namespace DinosaursPark.Services
 
         public async Task DeleteAll()
         {
+            // TODO тут надо бы прикруть какой-нибудь UnitOfWork или транзакцию
+            await _dinosaursService.DeleteAll();
             await _repository.DeleteAll();
         }
     }
