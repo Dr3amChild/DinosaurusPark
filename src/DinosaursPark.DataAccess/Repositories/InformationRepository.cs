@@ -35,5 +35,11 @@ namespace DinosaursPark.DataAccess.Repositories
             Context.Attach(info);
             await Context.SaveChangesAsync();
         }
+
+        public async Task DeleteAll()
+        {
+            Context.Information.RemoveRange(Context.Information);
+            await Context.SaveChangesAsync();
+        }
     }
 }

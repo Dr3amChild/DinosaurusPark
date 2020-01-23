@@ -7,5 +7,7 @@ namespace DinosaursPark.Contracts.Services
         Task<TItem> GetParkInfo<TItem>();
 
         Task<TItem> GetSpeciesInfo<TItem>();
+
+        Task DeleteAll();
     }
 }

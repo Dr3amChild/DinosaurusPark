@@ -11,5 +11,7 @@ namespace DinosaursPark.Contracts.Repositories
         Task<IReadOnlyCollection<SpeciesInformation>> GetSpeciesInfo();
 
         Task Add(ParkInformation info);
+
+        Task DeleteAll();
     }
 }

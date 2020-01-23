@@ -56,6 +56,16 @@ namespace DinosaursPark.DataAccess.Repositories
             await Context.Dinosaurs.AddRangeAsync(dinosaurs);
         }
 
+        public void DeleteAllDinosaurs()
+        {
+            Context.Dinosaurs.RemoveRange(Context.Dinosaurs);
+        }
+
+        public void DeleteAllSpecies()
+        {
+            Context.Species.RemoveRange(Context.Species);
+        }
+
         public async Task Commit()
         {
             await Context.SaveChangesAsync();

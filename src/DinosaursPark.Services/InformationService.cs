@@ -19,7 +19,7 @@ namespace DinosaursPark.Services
             _dinosaursRepository = dinosaursRepository ?? throw new ArgumentNullException(nameof(dinosaursRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
-
+        
         public async Task<TItem> GetParkInfo<TItem>()
         {
             var items = await _repository.GetParkInfo();
@@ -33,6 +33,11 @@ namespace DinosaursPark.Services
         {
             var items = await _repository.GetSpeciesInfo();
             return _mapper.Map<TItem>(items);
+        }
+
+        public async Task DeleteAll()
+        {
+            await _repository.DeleteAll();
         }
     }
 }

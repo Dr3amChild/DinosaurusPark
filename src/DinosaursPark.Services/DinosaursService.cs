@@ -33,5 +33,12 @@ namespace DinosaursPark.Services
             var mappedItems = _mapper.Map<IEnumerable<TItem>>(items);
             return new PagingResult<TItem>(mappedItems, pageNumber, pageSize, count);
         }
+
+        public async Task DeleteAll()
+        {
+            _dinorepository.DeleteAllDinosaurs();
+            _dinorepository.DeleteAllSpecies();
+            await _dinorepository.Commit();
+        }
     }
 }
