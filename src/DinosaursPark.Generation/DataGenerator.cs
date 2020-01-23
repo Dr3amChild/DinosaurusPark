@@ -69,7 +69,7 @@ namespace DinosaursPark.Generation
                 .CustomInstantiator(f =>
                     new ParkInformation
                     {
-                        Name = f.Random.Words(2),
+                        Name = string.Join(" ", f.Random.WordsArray(2).Select(w => w.FirstUp())),
                         Area = f.Random.Double(10, 1000),
                         Address = $"{f.Address.Country()}, {f.Address.City()}, {f.Address.StreetName()}, {f.Address.BuildingNumber()}"
                     });
