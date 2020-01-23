@@ -34,5 +34,12 @@ namespace DinosaursPark.WebApplication.Controllers
             var result = await _dinoService.Get<SimpleDinosaurResponse>(request.PageNumber, request.PageSize);
             return Ok(result);
         }
+
+        [HttpDelete]
+        public async Task<IActionResult> ClearInformation()
+        {
+            await _dinoService.DeleteAll();
+            return NoContent();
+        }
     }
 }
