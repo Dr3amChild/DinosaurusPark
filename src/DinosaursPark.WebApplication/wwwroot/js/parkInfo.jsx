@@ -14,9 +14,22 @@
                     </tbody>
                 </table>
                 <button className="btn btn-info" onClick={this.props.onSpeciesInfoClick}>Загрузить данные о видах</button>
-                <button id="delete-park-btn" className="btn btn-danger" onClick={this.props.onDeleteParkClick}>Уничтожить парк</button>
+                <button id="delete-park-btn" className="btn btn-danger" onClick={this.showModal.bind(this)}>Уничтожить парк</button>
             </div>
         );
+    }
+
+    showModal() {
+        const area = document.getElementById("delete-modal");
+        ReactDOM.render(
+            <ConfirmationModal
+                title="Удаление"
+                text="Вы действительно хотите закрыть этот парк и усыпить всех динозавров?"
+                okBtnClass="btn-danger"
+                okBtnTitle="Удалить"
+                callback={this.props.onDeleteParkClick} />,
+            area);
+        $("#delete-modal").modal();
     }
 }
 
