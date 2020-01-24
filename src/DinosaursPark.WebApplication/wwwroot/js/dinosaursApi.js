@@ -1,5 +1,6 @@
 ﻿class DinosaursApi extends BaseApi {
     constructor(pageSize) {
+        super();
         this.pageSize = pageSize;
     }
 
