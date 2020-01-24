@@ -1,34 +1,21 @@
-﻿class DinosaursApi {
+﻿class DinosaursApi extends BaseApi {
     constructor(pageSize) {
         this.pageSize = pageSize;
     }
 
-    async generate(speciesCount, dinosaursCount) {
-        const response = await window.fetch("/generation/create", {
-            method: "POST",
-            headers: {
-                'Content-Type': "application/json"
-            },
-            body: JSON.stringify({ speciesCount, dinosaursCount })
-        });
-        return await response.json();
+    async generate(speciesCount, dinosaursCount) {        
+        return this.postInner("/generation/create", { speciesCount, dinosaursCount });
     }
 
     async getById(id) {
-        const response = await window.fetch(`/get?id=${id}`, {
-            method: "GET"
-        });
-        return await response.json();
+        return await this.getInner(`/get?id=${id}`);
     }
 
     async getPage(pageNumber) {
-        const response = await window.fetch(`/all?pageSize=${this.pageSize}&pageNumber=${pageNumber}`, {
-            method: "GET"
-        });
-        return await response.json();
+        return await this.getInner(`/all?pageSize=${this.pageSize}&pageNumber=${pageNumber}`);
     }
 
-    async delete() {
-        await window.fetch(`/`, { method: "DELETE" });       
+    async delete() {        
+        await this.deleteInner(`/`); 
     }
 }
