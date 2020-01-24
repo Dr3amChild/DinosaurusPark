@@ -97,3 +97,8 @@ caption {
 .page-item {
     cursor: pointer;
 }
+
+#delete-park-btn {
+    display: block;
+    margin-top: 0.3rem;
+}

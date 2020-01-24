@@ -27,4 +27,8 @@
         });
         return await response.json();
     }
+
+    async delete() {
+        await window.fetch(`/`, { method: "DELETE" });       
+    }
 }

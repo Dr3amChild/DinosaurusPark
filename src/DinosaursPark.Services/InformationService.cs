@@ -10,21 +10,25 @@ namespace DinosaursPark.Services
     public class InformationService : IInformationService
     {
         private readonly IDinosaursService _dinosaursService;
-        private readonly IInformationRepository _repository;
+        private readonly IInformationRepository _informationRepository;
         private readonly IDinoRepository _dinosaursRepository;
         private readonly IMapper _mapper;
 
-        public InformationService(IDinosaursService dinosaursService, IInformationRepository repository, IDinoRepository dinosaursRepository, IMapper mapper)
+        public InformationService(
+            IDinosaursService dinosaursService,
+            IInformationRepository informationRepository,
+            IDinoRepository dinosaursRepository,
+            IMapper mapper)
         {
             _dinosaursService = dinosaursService ?? throw new ArgumentNullException(nameof(dinosaursService));
-            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+            _informationRepository = informationRepository ?? throw new ArgumentNullException(nameof(informationRepository));
             _dinosaursRepository = dinosaursRepository ?? throw new ArgumentNullException(nameof(dinosaursRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
         
         public async Task<TItem> GetParkInfo<TItem>()
         {
-            var items = await _repository.GetParkInfo();
+            var items = await _informationRepository.GetParkInfo();
             int dinosaursCount = await _dinosaursRepository.DinosaursCount();
             int speciesCount = await _dinosaursRepository.SpeciesCount();
             var countInformation = new CountInformation(speciesCount, dinosaursCount);
@@ -33,7 +37,7 @@ namespace DinosaursPark.Services
 
         public async Task<TItem> GetSpeciesInfo<TItem>()
         {
-            var items = await _repository.GetSpeciesInfo();
+            var items = await _informationRepository.GetSpeciesInfo();
             return _mapper.Map<TItem>(items);
         }
 
@@ -41,7 +45,7 @@ namespace DinosaursPark.Services
         {
             // TODO тут надо бы прикруть какой-нибудь UnitOfWork или транзакцию
             await _dinosaursService.DeleteAll();
-            await _repository.DeleteAll();
+            await _informationRepository.DeleteAll();
         }
     }
 }

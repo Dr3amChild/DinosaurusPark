@@ -1,22 +1,34 @@
 ﻿class ParkInfoApi {   
     async getParkInfo() {
-        return this.getOrThrow(`/information/park`);
+        return this.getInner(`/information/park`);
     }
 
     async getSpeciesInfo() {
-        return this.getOrThrow(`/information/species`);
+        return this.getInner(`/information/species`);
     }
-    
-    async getOrThrow(url) {
+
+    async delete() {
+        return this.deleteInner(`/information`);
+    }
+
+    async getInner(url) {
         const response = await window.fetch(url, {
             method: "GET"
         });
 
-        const responseText = await response.json();
+        const responseText = await response.json();        
         if(!response.ok) {
             throw new Error(responseText);
         }
-
+        
         return responseText;
+    }
+
+    async deleteInner(url) {
+        const response = await window.fetch(url, { method: "DELETE" });
+       
+        if (!response.ok) {
+            throw new Error(response);
+        }
     }
 }

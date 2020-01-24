@@ -14,6 +14,7 @@
                     </tbody>
                 </table>
                 <button className="btn btn-info" onClick={this.props.onSpeciesInfoClick}>Загрузить данные о видах</button>
+                <button id="delete-park-btn" className="btn btn-danger" onClick={this.props.onDeleteParkClick}>Уничтожить парк</button>
             </div>
         );
     }
