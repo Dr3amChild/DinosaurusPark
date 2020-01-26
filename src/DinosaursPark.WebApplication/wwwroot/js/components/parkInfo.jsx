@@ -22,8 +22,8 @@
     showModal() {
         const area = document.getElementById("delete-modal");
         ReactDOM.render(
-            <ConfirmationModal
-                title="Удаление"
+            <DeleteConfirmModal
+                header="Удаление"
                 text="Вы действительно хотите закрыть этот парк и усыпить всех динозавров?"
                 okBtnClass="btn-danger"
                 okBtnTitle="Удалить"
