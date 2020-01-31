@@ -1,9 +1,10 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Threading.Tasks;
+using AutoMapper;
+using DinosaursPark.Contracts.Models;
 using DinosaursPark.Contracts.Repositories;
 using DinosaursPark.Contracts.Services;
-using System;
-using System.Threading.Tasks;
-using DinosaursPark.Contracts.Models;
+using Microsoft.Extensions.Logging;
 
 namespace DinosaursPark.Services
 {
@@ -13,21 +14,24 @@ namespace DinosaursPark.Services
         private readonly IInformationRepository _informationRepository;
         private readonly IDinoRepository _dinosaursRepository;
         private readonly IMapper _mapper;
+        private readonly ILogger<DinosaursService> _logger;
 
         public InformationService(
             IDinosaursService dinosaursService,
             IInformationRepository informationRepository,
             IDinoRepository dinosaursRepository,
-            IMapper mapper)
+            IMapper mapper, ILogger<DinosaursService> logger)
         {
             _dinosaursService = dinosaursService ?? throw new ArgumentNullException(nameof(dinosaursService));
             _informationRepository = informationRepository ?? throw new ArgumentNullException(nameof(informationRepository));
             _dinosaursRepository = dinosaursRepository ?? throw new ArgumentNullException(nameof(dinosaursRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
         
         public async Task<TItem> GetParkInfo<TItem>()
         {
+            _logger.LogDebug($"{nameof(InformationService)}.{nameof(GetParkInfo)}()");
             var items = await _informationRepository.GetParkInfo();
             int dinosaursCount = await _dinosaursRepository.DinosaursCount();
             int speciesCount = await _dinosaursRepository.SpeciesCount();
@@ -37,12 +41,14 @@ namespace DinosaursPark.Services
 
         public async Task<TItem> GetSpeciesInfo<TItem>()
         {
+            _logger.LogDebug($"{nameof(InformationService)}.{nameof(GetSpeciesInfo)}()");
             var items = await _informationRepository.GetSpeciesInfo();
             return _mapper.Map<TItem>(items);
         }
 
         public async Task DeleteAll()
         {
+            _logger.LogDebug($"{nameof(InformationService)}.{nameof(DeleteAll)}()");
             // TODO тут надо бы прикруть какой-нибудь UnitOfWork или транзакцию
             await _dinosaursService.DeleteAll();
             await _informationRepository.DeleteAll();

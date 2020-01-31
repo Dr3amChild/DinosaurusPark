@@ -41,7 +41,7 @@ namespace DinosaursPark.Services
 
         public async Task DeleteAll()
         {
-            _logger.LogDebug($"{nameof(DinosaursService)}.{nameof(DeleteAll)}");
+            _logger.LogDebug($"{nameof(DinosaursService)}.{nameof(DeleteAll)}()");
             _dinosaursRepository.DeleteAllDinosaurs();
             _dinosaursRepository.DeleteAllSpecies();
             await _dinosaursRepository.Commit();
