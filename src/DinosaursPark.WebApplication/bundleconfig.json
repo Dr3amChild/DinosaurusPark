@@ -1,0 +1,24 @@
+[
+    {
+      "outputFileName": "wwwroot/css/main.min.css",
+      "inputFiles": [
+        "wwwroot/css/main.css",
+        "wwwroot/css/site.css"
+      ]
+    },
+    {
+      "outputFileName": "wwwroot/js/main.min.js",
+      "inputFiles": [
+        "wwwroot/js/scripts/generation.js",
+        "wwwroot/js/scripts/baseApi.js",
+        "wwwroot/js/scripts/dinosaursApi.js",
+        "wwwroot/js/scripts/validator.js",
+        "wwwroot/js/scripts/paging.js"
+      ],
+      "minify": {
+        "enabled": false,
+        "renameLocals": true
+      },
+      "sourceMap": false
+    }
+  ]
