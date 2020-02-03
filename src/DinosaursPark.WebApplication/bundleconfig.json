@@ -1,10 +1,16 @@
+// Минификатор работает странно. 
+// После минификации ломает css
+//и удаляет модификатор async из асинхронных функций
 [
     {
       "outputFileName": "wwwroot/css/main.min.css",
       "inputFiles": [
-        "wwwroot/css/main.css",
-        "wwwroot/css/site.css"
-      ]
+        "wwwroot/css/site.css",
+        "wwwroot/css/main.css"
+      ],
+      "minify": {
+        "enabled": false
+      }
     },
     {
       "outputFileName": "wwwroot/js/main.min.js",
@@ -14,6 +20,40 @@
         "wwwroot/js/scripts/dinosaursApi.js",
         "wwwroot/js/scripts/validator.js",
         "wwwroot/js/scripts/paging.js"
+      ],
+      "minify": {
+        "enabled": false,
+        "renameLocals": true
+      },
+      "sourceMap": false
+    },
+    {
+      "outputFileName": "wwwroot/js/start.min.js",
+      "inputFiles": [
+        "wwwroot/js/scripts/startPageOnLoad.js"
+      ],
+      "minify": {
+        "enabled": false,
+        "renameLocals": true
+      },
+      "sourceMap": false
+    }, 
+    {
+      "outputFileName": "wwwroot/js/generation.min.js",
+      "inputFiles": [
+        "wwwroot/js/scripts/generationOnLoad.js"
+      ],
+      "minify": {
+        "enabled": false,
+        "renameLocals": true
+      },
+      "sourceMap": false
+    },
+    {
+      "outputFileName": "wwwroot/js/info.min.js",
+      "inputFiles": [
+        "wwwroot/js/scripts/infoOnLoad.js",
+        "wwwroot/js/scripts/parkInfoApi.js"
       ],
       "minify": {
         "enabled": false,

@@ -10,6 +10,11 @@
 /src/DinosaursPark.WebApplication/obj
 /src/DinosaursPark.WebApplication/bin
 /src/DinosaursPark.WebApplication/DinosaursPark.WebApplication.csproj.user
+/src/DinosaursPark.WebApplication/wwwroot/css/main.min.css
+/src/DinosaursPark.WebApplication/wwwroot/js/main.min.js
+/src/DinosaursPark.WebApplication/wwwroot/js/start.min.js
+/src/DinosaursPark.WebApplication/wwwroot/js/generation.min.js
+/src/DinosaursPark.WebApplication/wwwroot/js/info.min.js
 /tests/DinosaursPark.IntegrationTests/bin
 /tests/DinosaursPark.IntegrationTests/obj
 /src/DinosaursPark.Contracts/bin
