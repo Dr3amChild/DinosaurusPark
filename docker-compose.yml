@@ -9,10 +9,12 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       DINOPARK_DB__CONNECTIONSTRING: Host=pg;Port=5432;Database=dinosaurus_park;Username=postgres;
-      DINOPARK_SERILOG__LEVEL: Verbose
+      DINOPARK_SERILOG__SystemLogsLevel: Debug
+      DINOPARK_SERILOG__MicrosoftLogsLevel: Warning
+      DINOPARK_SERILOG__CustomLogsLevel: Debug
+      DINOPARK_SERILOG__USEREQUESTLOGGING: "true"
       DINOPARK_FILES__ROOT: wwwroot/img/dinosaurs
       DINOPARK_FILES__SHORTROOT: /img/dinosaurs
-      DINOPARK_SERILOG__USEREQUESTLOGGING: "true"
     depends_on:
       - pg
     ports:

@@ -5,7 +5,6 @@ using FluentMigrator.Runner;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Npgsql;
 using Polly;
 using Serilog;
 using System;
@@ -81,8 +80,10 @@ namespace DinosaursPark.WebApplication
             Log.Logger = new LoggerConfiguration()
                 .Enrich.FromLogContext()
                 .MinimumLevel.Debug()
+                .MinimumLevel.Override("System", settings.Serilog.SystemLogsLevel)
+                .MinimumLevel.Override("Microsoft", settings.Serilog.MicrosoftLogsLevel)
                 .WriteTo.Console(
-                    settings.Serilog.Level,
+                    settings.Serilog.CustomLogsLevel,
                     "{NewLine}{Timestamp:HH:mm:ss} [{Level}] ({CorrelationToken}) {Message}{NewLine}{Exception}")
                 .CreateLogger();
         }
