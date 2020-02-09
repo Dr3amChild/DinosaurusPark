@@ -21,13 +21,17 @@ namespace DinosaursPark.DataAccess.Repositories
                    ?? throw new NotFoundException($"Information not found");
         }
 
-        public async Task<IReadOnlyCollection<SpeciesInformation>> GetSpeciesInfo()
+        public async Task<IReadOnlyCollection<SpeciesInformation>> GetSpeciesInfo(int count, int offset)
         {
             var query = from dinosaur in Context.Dinosaurs
                      join species in Context.Species on dinosaur.SpeciesId equals species.Id
                      group dinosaur by species.Name into gr
                      select new SpeciesInformation { SpeciesName = gr.Key, Count = gr.Count() };
-            return await query.OrderByDescending(s => s.Count).ToArrayAsync();
+            return await query
+                            .OrderByDescending(s => s.Count)
+                            .Skip(offset)
+                            .Take(count)
+                            .ToArrayAsync();
         }
 
         public async Task Add(ParkInformation info)

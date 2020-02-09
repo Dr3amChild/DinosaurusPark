@@ -1,4 +1,5 @@
 ﻿using DinosaursPark.Contracts.Services;
+using DinosaursPark.WebApplication.Requests;
 using DinosaursPark.WebApplication.Responses;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -31,10 +32,10 @@ namespace DinosaursPark.WebApplication.Controllers
         }
 
         [HttpGet("species")]
-        public async Task<IActionResult> SpeciesInfo()
+        public async Task<IActionResult> SpeciesInfo(PagingRequest request)
         {
-            var items = await _informationService.GetSpeciesInfo<IReadOnlyCollection<SpeciesInformationResponse>>();
-            var result = new CollectionResponse<SpeciesInformationResponse>(items);
+            var result = await _informationService
+                .GetSpeciesInfo<SpeciesInformationResponse>(request.PageNumber, request.PageSize);
             return Ok(result);
         }
 

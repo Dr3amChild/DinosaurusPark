@@ -8,7 +8,7 @@ namespace DinosaursPark.Contracts.Repositories
     {
         Task<ParkInformation> GetParkInfo();
 
-        Task<IReadOnlyCollection<SpeciesInformation>> GetSpeciesInfo();
+        Task<IReadOnlyCollection<SpeciesInformation>> GetSpeciesInfo(int count, int offset);
 
         Task Add(ParkInformation info);
 
