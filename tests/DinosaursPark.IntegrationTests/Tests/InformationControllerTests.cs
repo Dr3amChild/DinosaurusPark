@@ -77,5 +77,31 @@ namespace DinosaursPark.IntegrationTests.Tests
             var result = await _informationApi.GetSpeciesInfo<CollectionResponse<SpeciesInformationResponse>>(1, 10);
             Assert.AreEqual(expectedDinosaursCount, result.Content.Items.First().Count);
         }
+
+        [Test]
+        public async Task DeleteAll_ReturnsNoContent_Always()
+        {
+            var result = await _informationApi.DeleteAll<object>();
+            Assert.AreEqual(HttpStatusCode.NoContent, result.StatusCode);
+        }
+
+        [Test]
+        public async Task GetSpeciesInfo_ReturnsEmptyCollection_AfterDeleteAllInvoked()
+        {
+            await _generationApi.Generate<string>(new GenerationRequest { SpeciesCount = 1, DinosaursCount = 10 });
+            await _informationApi.DeleteAll<object>();
+            var result = await _informationApi.GetSpeciesInfo<CollectionResponse<SpeciesInformationResponse>>(1, 10);
+            Assert.AreEqual(result.Content.Items.Count, 0);
+        }
+
+        [Test]
+        public async Task GetSpeciesInfoAfterGeneration_ReturnsMoreItems_Than_AfterDeletion()
+        {
+            await _generationApi.Generate<string>(new GenerationRequest { SpeciesCount = 1, DinosaursCount = 10 });
+            var firstResult = await _informationApi.GetSpeciesInfo<CollectionResponse<SpeciesInformationResponse>>(1, 10);
+            await _informationApi.DeleteAll<object>();
+            var secondResult = await _informationApi.GetSpeciesInfo<CollectionResponse<SpeciesInformationResponse>>(1, 10);
+            Assert.Greater(firstResult.Content.Items.Count, secondResult.Content.Items.Count);
+        }
     }
 }
