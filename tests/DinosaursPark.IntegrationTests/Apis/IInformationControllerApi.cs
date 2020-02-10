@@ -11,6 +11,6 @@ namespace DinosaursPark.IntegrationTests.Apis
         Task<ApiResponse<T>> GetParkInfo<T>();
 
         [Get("/information/species")]
-        Task<ApiResponse<T>> GetSpeciesInfo<T>();
+        Task<ApiResponse<T>> GetSpeciesInfo<T>(int pageNumber, int pageSize);
     }
 }
