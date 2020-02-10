@@ -1,7 +1,6 @@
 ﻿using DinosaursPark.DataAccess;
 using DinosaursPark.WebApplication.Exceptions;
 using DinosaursPark.WebApplication.Settings;
-using FluentMigrator.Runner;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,10 +33,6 @@ namespace DinosaursPark.WebApplication
                 var ctx = host.Services.GetService<DinosaursContext>();
                 ctx.Database.EnsureCreated();
             });
-
-            //host.Services
-            //    .GetRequiredService<IMigrationRunner>()
-            //    .MigrateUp();
 
             await host.RunAsync();
         }

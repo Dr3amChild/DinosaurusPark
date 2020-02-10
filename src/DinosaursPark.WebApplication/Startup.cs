@@ -2,7 +2,6 @@
 using DinosaursPark.Contracts.Repositories;
 using DinosaursPark.Contracts.Services;
 using DinosaursPark.DataAccess;
-using DinosaursPark.DataAccess.Migrations;
 using DinosaursPark.DataAccess.Repositories;
 using DinosaursPark.Generation;
 using DinosaursPark.Services;
@@ -11,7 +10,6 @@ using DinosaursPark.WebApplication.Mapping;
 using DinosaursPark.WebApplication.Middlewares;
 using DinosaursPark.WebApplication.Settings;
 using DinosaursPark.WebApplication.Validation;
-using FluentMigrator.Runner;
 using FluentValidation.AspNetCore;
 using JavaScriptEngineSwitcher.ChakraCore;
 using JavaScriptEngineSwitcher.Extensions.MsDependencyInjection;
@@ -49,12 +47,6 @@ namespace DinosaursPark.WebApplication
 
             services
                 .AddAutoMapper(typeof(AppMappingProfile))
-                .AddFluentMigratorCore()
-                .ConfigureRunner(builder => builder
-                    .AddPostgres()
-                    .WithGlobalConnectionString(_settings.Db.ConnectionString)
-                    .ScanIn(typeof(CreateTablesMigration).Assembly)
-                    .For.Migrations())
                 .AddSingleton(_settings)
                 .AddSingleton(_settings.Db)
                 .AddSingleton(_settings.Files)
