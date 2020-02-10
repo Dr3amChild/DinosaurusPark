@@ -1,10 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using DinosaursPark.Contracts.Models;
 using DinosaursPark.Contracts.Repositories;
 using DinosaursPark.Contracts.Services;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace DinosaursPark.Services
 {
@@ -39,11 +40,14 @@ namespace DinosaursPark.Services
             return _mapper.Map<TItem>((items, countInformation));
         }
 
-        public async Task<TItem> GetSpeciesInfo<TItem>()
+        public async Task<PagingResult<TItem>> GetSpeciesInfo<TItem>(int pageNumber, int pageSize)
         {
             _logger.LogDebug($"{nameof(InformationService)}.{nameof(GetSpeciesInfo)}()");
-            var items = await _informationRepository.GetSpeciesInfo();
-            return _mapper.Map<TItem>(items);
+            int offset = (pageNumber - 1) * pageSize;
+            var items = await _informationRepository.GetSpeciesInfo(pageSize, offset);
+            int count = await _dinosaursRepository.DinosaursCount();
+            var mappedItems =  _mapper.Map<IEnumerable<TItem>>(items);
+            return new PagingResult<TItem>(mappedItems, pageNumber, pageSize, count);
         }
 
         public async Task DeleteAll()

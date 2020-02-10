@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using DinosaursPark.Contracts.Models;
+using System.Threading.Tasks;
 
 namespace DinosaursPark.Contracts.Services
 {
@@ -6,7 +7,7 @@ namespace DinosaursPark.Contracts.Services
     {
         Task<TItem> GetParkInfo<TItem>();
 
-        Task<TItem> GetSpeciesInfo<TItem>();
+        Task<PagingResult<TItem>> GetSpeciesInfo<TItem>(int pageNumber, int pageSize);
 
         Task DeleteAll();
     }

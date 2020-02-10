@@ -2,7 +2,8 @@
 const ReactDOM = window.ReactDOM;
 
 window.onload = async () => {
-    const infoApi = new ParkInfoApi();
+    const pageSize = 10; //todo replace pageSize
+    const infoApi = new ParkInfoApi(pageSize);
     try {
         const parkInfo = await infoApi.getParkInfo();
         const area = document.getElementById("info-area");
@@ -10,7 +11,7 @@ window.onload = async () => {
         ReactDOM.render(React.createElement(ParkInfo, {
             info: parkInfo,
             onSpeciesInfoClick: async () => await onSpeciesInfoClick(infoApi),
-            onDeleteParkClick: async () => await onDeleteParkClick(infoApi, new DinosaursApi(10)), //todo replace pageSize
+            onDeleteParkClick: async () => await onDeleteParkClick(infoApi, new DinosaursApi(pageSize)),
         }), area);
     } catch (e) {
         window.location.href = "/generation";
@@ -18,7 +19,7 @@ window.onload = async () => {
 };
 
 async function onSpeciesInfoClick(api) {
-    const speciesInfo = await api.getSpeciesInfo();
+    const speciesInfo = await api.getSpeciesInfo(1); //todo replace page number
     const infoArea = document.getElementById("species-info-area");
     ReactDOM.render(React.createElement(SpeciesInfo, {
         info: speciesInfo.items,
