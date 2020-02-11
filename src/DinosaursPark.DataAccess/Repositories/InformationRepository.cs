@@ -17,7 +17,10 @@ namespace DinosaursPark.DataAccess.Repositories
 
         public async Task<ParkInformation> GetParkInfo()
         {
-            return await Context.Information.FirstOrDefaultAsync()
+            return await Context
+                           .Information
+                           .AsNoTracking()
+                           .FirstOrDefaultAsync()
                    ?? throw new NotFoundException($"Information not found");
         }
 
@@ -31,6 +34,7 @@ namespace DinosaursPark.DataAccess.Repositories
                             .OrderByDescending(s => s.Count)
                             .Skip(offset)
                             .Take(count)
+                            .AsNoTracking()
                             .ToArrayAsync();
         }
 
