@@ -1,7 +1,8 @@
 ﻿class Pages extends React.Component {
     render() {
+        const className = this.props.large ? "pagination pagination-lg" : "pagination";
         return (
-            <ul id="paging-list" className="pagination pagination-lg">
+            <ul id="paging-list" className={className}>
                 {this.createPages()}
             </ul>
         );

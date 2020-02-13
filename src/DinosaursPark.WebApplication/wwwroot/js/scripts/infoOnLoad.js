@@ -10,7 +10,7 @@ window.onload = async () => {
         ReactDOM.unmountComponentAtNode(area);
         ReactDOM.render(React.createElement(ParkInfo, {
             info: parkInfo,
-            onSpeciesInfoClick: async () => await onSpeciesInfoClick(infoApi),
+            onSpeciesInfoClick: async () => await onSpeciesInfoClick(infoApi, 1),
             onDeleteParkClick: async () => await onDeleteParkClick(infoApi, new DinosaursApi(pageSize)),
         }), area);
     } catch (e) {
@@ -18,16 +18,29 @@ window.onload = async () => {
     }
 };
 
-async function onSpeciesInfoClick(api) {
-    const speciesInfo = await api.getSpeciesInfo(1); //todo replace page number
+async function onSpeciesInfoClick(api, pageNum) {
+    const speciesInfo = await api.getSpeciesInfo(pageNum);
     const infoArea = document.getElementById("species-info-area");
     ReactDOM.render(React.createElement(SpeciesInfo, {
         info: speciesInfo.items,
         onSpeciesInfoClick: async () => await onSpeciesInfoClick(api)
     }), infoArea);
+
+    //new Paging(api, "paging-nav").render(speciesInfo);
+    const paging = new Paging(api, "paging-nav", async (pageNumber) => await showSpeciesInfoPage(api, pageNumber));
+    paging.render(speciesInfo);
 }
 
 async function onDeleteParkClick(infoApi) {
     await infoApi.delete();
     window.location.reload();
+}
+
+async function showSpeciesInfoPage(api, pageNumber) {
+    const data = await api.getSpeciesInfo(pageNumber);
+    const area = document.getElementById("species-info-area");
+    ReactDOM.render(React.createElement(SpeciesInfo, {
+        info: data.items,
+        onSpeciesInfoClick: async () => await onSpeciesInfoClick(api)
+    }), area);
 }

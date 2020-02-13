@@ -1,34 +1,31 @@
 ﻿class Paging {
-    constructor(api) {
+    constructor(api, pagingAreaId, callback) {
         this.api = api;
+        this.paginAreaId = pagingAreaId;
+        this.showDataCallback = callback;
     }
     
-    show(paging) {
-        const area = document.getElementById("dinosaurs-area");
-        ReactDOM.render(React.createElement(Cards, { items: paging.items }), area);
-    }
-
-    setPaging(paging) {
-        const pagingArea = document.getElementById("paging-nav");
+    render(paging, large = false) {
+        const pagingArea = document.getElementById(this.paginAreaId);
         ReactDOM.unmountComponentAtNode(pagingArea);
         ReactDOM.render(React.createElement(
             Pages,
             {
                 pagesCount: paging.pagesCount,
                 activePage: paging.pageNumber,
-                onClick: (e) => this.onPageClick(e, this.api, paging)
+                large,
+                onClick: (e) => this.onPageClick(e, paging, large)
             }), pagingArea);
     }
-
-    async onPageClick(e, api, paging) {
+     
+    async onPageClick(e, paging, large) {
         const pageNum = e.currentTarget.getAttribute("page-num");
-        const result = await api.getPage(pageNum);
         const pages = document.getElementsByClassName("page-item");
         for (let page of pages) {
             page.className = page.getAttribute("page-num") === pageNum ? "page-item active" : "page-item";
         }
-        this.show(result);
+        this.showDataCallback(pageNum);
         paging.pageNumber = parseInt(pageNum);
-        this.setPaging(paging);
+        this.render(paging, large);
     }
 }

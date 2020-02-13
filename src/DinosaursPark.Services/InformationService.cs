@@ -39,10 +39,10 @@ namespace DinosaursPark.Services
 
         public async Task<PagingResult<TItem>> GetSpeciesInfo<TItem>(int pageNumber, int pageSize)
         {
-            Logger.LogDebug($"{nameof(InformationService)}.{nameof(GetSpeciesInfo)}()");
+            Logger.LogDebug($"{nameof(InformationService)}.{nameof(GetSpeciesInfo)}({pageNumber}, {pageSize})");
             int offset = (pageNumber - 1) * pageSize;
             var items = await _informationRepository.GetSpeciesInfo(pageSize, offset);
-            int count = await _dinosaursRepository.DinosaursCount();
+            int count = await _dinosaursRepository.SpeciesCount();
             var mappedItems =  Mapper.Map<IEnumerable<TItem>>(items);
             return new PagingResult<TItem>(mappedItems, pageNumber, pageSize, count);
         }
