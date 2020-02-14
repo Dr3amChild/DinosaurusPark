@@ -46,7 +46,7 @@ class Button extends React.Component {
     }
 
     async onLoadInfoClick(id) {
-        const info = await new DinosaursApi(10).getById(id); //todo replace with class member
+        const info = await new DinosaursApi(Constants.PageSize).getById(id);
         ReactDOM.render(React.createElement(DinosaurModal,
             {
                 modalHeader: "Подробная информация",

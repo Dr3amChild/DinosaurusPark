@@ -2,8 +2,7 @@
 const ReactDOM = window.ReactDOM;
 
 window.onload = async () => {
-    const pageSize = 10; //todo replace literal
-    const api = new DinosaursApi(pageSize);    
+    const api = new DinosaursApi(Constants.PageSize);    
     const result = await api.getPage(1);
     if (!result || !result.items.length) {
         window.location.href = "/generation";

@@ -3,7 +3,7 @@ const ReactDOM = window.ReactDOM;
 const redirect = window.Redirect;
 
 window.onload = async () => {
-    await new DinosaursApi(10).getPage(1);
-    const generation = new Generation(10, 100, 10, redirect);
+    await new DinosaursApi(Constants.PageSize).getPage(1);
+    const generation = new Generation(Constants.InitialSpeciesCount, Constants.InitialDinosaursCount, Constants.PageSize, redirect);
     generation.showForm();
 };

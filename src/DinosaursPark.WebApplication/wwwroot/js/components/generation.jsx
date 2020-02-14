@@ -17,7 +17,7 @@
                         title="Количество видов:"
                         text={this.props.species}
                         errorClass={this.errorClassName}
-            message={`Поле может содержать только целые числа от 1 до 100`}
+                        message={`Поле может содержать только целые числа от 1 до 1000`}
                         placeholder="Введите значение" />);
         items.push(<FormGroup
                         key="3"
@@ -28,7 +28,7 @@
                         text={this.props.dinosaurs}
                         errorClass={this.errorClassName}
                         placeholder="Введите значение" />);
-        items.push(<button type="button" key="4" className="btn btn-info" onClick={this.onGenerateClick}>
+                        items.push(<button type="button" key="4" className="btn btn-info" onClick={this.onGenerateClick}>
                         <span id="wait-block" className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                         Сгенерировать
                    </button>);        

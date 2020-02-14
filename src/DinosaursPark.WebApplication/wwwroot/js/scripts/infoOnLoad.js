@@ -2,8 +2,7 @@
 const ReactDOM = window.ReactDOM;
 
 window.onload = async () => {
-    const pageSize = 10; //todo replace pageSize
-    const infoApi = new ParkInfoApi(pageSize);
+    const infoApi = new ParkInfoApi(Constants.PageSize);
     try {
         const parkInfo = await infoApi.getParkInfo();
         const area = document.getElementById("info-area");
@@ -11,7 +10,7 @@ window.onload = async () => {
         ReactDOM.render(React.createElement(ParkInfo, {
             info: parkInfo,
             onSpeciesInfoClick: async () => await onSpeciesInfoClick(infoApi, 1),
-            onDeleteParkClick: async () => await onDeleteParkClick(infoApi, new DinosaursApi(pageSize)),
+            onDeleteParkClick: async () => await onDeleteParkClick(infoApi, new DinosaursApi(Constants.PageSize)),
         }), area);
     } catch (e) {
         window.location.href = "/generation";

@@ -18,6 +18,7 @@
         "wwwroot/js/scripts/baseApi.js",
         "wwwroot/js/scripts/dinosaursApi.js",
         "wwwroot/js/scripts/validator.js",
+        "wwwroot/js/scripts/constants.js",
         "wwwroot/js/scripts/paging.js"
       ],
       "minify": {
