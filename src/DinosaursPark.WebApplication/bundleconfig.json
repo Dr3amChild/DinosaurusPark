@@ -15,7 +15,6 @@
     {
       "outputFileName": "wwwroot/js/main.min.js",
       "inputFiles": [
-        "wwwroot/js/scripts/generation.js",
         "wwwroot/js/scripts/baseApi.js",
         "wwwroot/js/scripts/dinosaursApi.js",
         "wwwroot/js/scripts/validator.js",
@@ -41,7 +40,8 @@
     {
       "outputFileName": "wwwroot/js/generation.min.js",
       "inputFiles": [
-        "wwwroot/js/scripts/generationOnLoad.js"
+        "wwwroot/js/scripts/generationOnLoad.js",
+        "wwwroot/js/scripts/generation.js"
       ],
       "minify": {
         "enabled": false,
